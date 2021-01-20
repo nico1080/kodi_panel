@@ -634,7 +634,7 @@ def strcb_codec(info, screen_mode, layout_name):
             return info['MusicPlayer.Codec']
     return ""
 
-def strcb_achannelnumber(info, screen_mode, layout_name):
+def strcb_channelnumber(info, screen_mode, layout_name):
     if 'MusicPlayer.Channels' in info:
         if info['MusicPlayer.Channels'] in ch_N:
             return ch_N[info['MusicPlayer.Channels']]
@@ -833,7 +833,7 @@ STRING_CB = {
     # Audio screen fields
     'codec'      : strcb_codec,
     'full_codec' : strcb_full_codec,
-    'achannelnumber':strcb_achannelnumber,
+    'channelnumber':strcb_channelnumber,
 
     # Video screen fields
     'acodec'     : strcb_acodec,

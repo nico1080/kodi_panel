@@ -428,7 +428,7 @@ format_str = "{codec} {MusicPlayer.BitsPerSample}/{MusicPlayer.SampleRate}KHz"
 #   dc:date.  Fortunately, the InfoLabel is left blank, unlike what
 #   happens for videos.
 [[A_LAYOUT.A_DEFAULT.fields]]
-name = "achannelnumber"
+name = "channelnumber"
 posx = 450
 posy = 182
 font = "font_tiny"
@@ -708,11 +708,11 @@ posx = 375
 posy = 220
 font = "font_tiny"
 fill = "color_7S"
-format_str = " {acodec} test {achannelnumber}"
+format_str = " {acodec} test {channelnumber}"
 
 
-[shared_element.vchannelnumber]
-name = "achannelnumber"
+[shared_element.channelnumber]
+name = "channelnumber"
 posx = 340
 posy = 220
 font = "font_tiny"
@@ -775,7 +775,7 @@ shared_element = "resolution"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "acodec"
 [[V_LAYOUT.V_DEFAULT.fields]]
-shared_element = "vchannelnumber"
+shared_element = "channelnumber"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_DEFAULT.fields]]
@@ -857,7 +857,7 @@ shared_element = "resolution"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "acodec"
 [[V_LAYOUT.V_PVR.fields]]
-shared_element = "vchannelnumber"
+shared_element = "channelnumber"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_PVR.fields]]
@@ -890,7 +890,7 @@ shared_element = "resolution"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "acodec"
 [[V_LAYOUT.V_LIVETV.fields]]
-shared_element = "vchannelnumber"
+shared_element = "channelnumber"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -924,7 +924,7 @@ shared_element = "resolution"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "acodec"
 [[V_LAYOUT.V_TV_SHOW.fields]]
-shared_element = "vchannelnumber"
+shared_element = "channelnumber"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_TV_SHOW.fields]]
@@ -958,7 +958,7 @@ shared_element = "resolution"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "acodec"
 [[V_LAYOUT.V_MOVIE.fields]]
-shared_element = "vchannelnumber"
+shared_element = "channelnumber"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_MOVIE.fields]]
