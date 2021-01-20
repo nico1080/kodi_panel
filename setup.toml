@@ -708,11 +708,11 @@ posx = 375
 posy = 220
 font = "font_tiny"
 fill = "color_7S"
-format_str = " {acodec} test {vchannelnumber}"
+format_str = " {acodec} test {achannelnumber}"
 
 
 [shared_element.vchannelnumber]
-name = "vchannelnumber"
+name = "achannelnumber"
 posx = 340
 posy = 220
 font = "font_tiny"

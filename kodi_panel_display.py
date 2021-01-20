@@ -640,6 +640,11 @@ def strcb_achannelnumber(info, screen_mode, layout_name):
             return ch_N[info['MusicPlayer.Channels']]
         else:
             return info['MusicPlayer.Channels']
+    if 'VideoPlayer.AudioChannels' in info:
+        if info['VideoPlayer.AudioChannels'] in ch_N:
+            return ch_N[info['VideoPlayer.AudioChannels']]
+        else:
+            return info['VideoPlayer.AudioChannels']
     return ""
 
 
