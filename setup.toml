@@ -97,6 +97,73 @@ ENABLE_VIDEO_SCREENS = true
 # desired if no touch interrupt is available.
 ENABLE_IDLE_STATUS = true
 
+# The script has built-in lists of Kodi InfoLabels to retrieve for the
+# various screens that are possible, defined at the beginning of the
+# file.  Each list can be augmented, if needed, via the *_LABELS lists
+# below.
+#
+# To make use of this feature, uncomment the associated assignment and
+# add additional InfoLabels as strings.  Here is an example, although
+# both of the InfoLabels listed are part of the built-in set:
+#
+#    STATUS_LABELS = [
+#       "System.Date",
+#       "System.CPUTemperature"
+#     ]
+#
+#
+# See the Kodi wiki:
+#
+#    https://kodi.wiki/view/InfoLabels
+#
+# to see what InfoLabels are available; these can change from one
+# version of Kodi to another.
+#
+
+# List of additional InfoLabels to retrieve for status screen
+ STATUS_LABELS = [
+ "Weather.Conditions",
+ "Weather.Temperature",
+ "System.TotalUptime",
+ "System.Time(hh:mm:ss)",
+ "PVR.BackendDiskSpace",
+ "PVR.BackendTimers",
+ "PVR.BackendRecordings",
+ ]
+
+# List of additional InfoLabels to retrieve for audio screen(s)
+ AUDIO_LABELS = [
+     "MusicPlayer.BitRate",
+     "MusicPlayer.BitsPerSample",
+     "MusicPlayer.SampleRate",
+     "MusicPlayer.Channels",
+     "MusicPlayer.PlaylistLength",
+		 ]
+
+# List of additional InfoLabels to retrieve for video screen(s)
+ VIDEO_LABELS = [
+	 "VideoPlayer.AudioChannels",
+	 "VideoPlayer.Duration",
+	 "VideoPlayer.PlayCount",
+	 "Player.FinishTime",
+	 "System.Time(hh:mm:ss)",
+	 "Player.chapter",
+	 "Player.chaptercount",
+	 "Player.chaptername",
+	 "System.Date",
+	 "System.Uptime",
+	 "System.CPUTemperature",
+	 "System.CpuFrequency",
+	 "system.BuildVersion",
+	 "System.BuildDate",
+	 "System.Time",
+	 "Weather.Conditions",
+	 "Weather.Temperature",
+	 "System.TotalUptime",
+	 "VideoPlayer.TimeRemaining",
+	 ]
+
+
 
 # Paths to default thumbnails for audio and status screen.  These now
 # get resized, to whatever is specified for the audio screen used.
@@ -347,11 +414,12 @@ font = "font_tiny"
 fill = "white"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
-name = "full_codec"   # special treatment in audio_screens()
+name = "MusicPlayer.Duration"   # special treatment in audio_screens()
 posx = 450
 posy = 132
 font = "font_tiny"
 fill = "white"
+format_str = "{codec} {MusicPlayer.BitsPerSample}/{MusicPlayer.SampleRate}KHz"
 
 
 
@@ -362,7 +430,7 @@ fill = "white"
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "achannelnumber"
 posx = 450
-posy = 168
+posy = 182
 font = "font_tiny"
 fill = "white"
 suffix = "Ch"

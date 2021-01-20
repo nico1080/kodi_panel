@@ -81,6 +81,18 @@ codec_name = {
     "dsd_lsbf_planar": "DSD",
     "h264": "x264"
 }
+# channel number lookup
+ch_N = {
+    "1"      : "1.0",
+    "2"      : "2.0",
+    "3"      : "2.1",
+    "4"      : "3.1",
+    "5"      : "4.1",
+    "6"      : "5.1",
+    "7"      : "6.1",
+    "8"      : "7.1",
+    "10"     : "9.1",
+}
 
 
 #
@@ -109,13 +121,6 @@ STATUS_LABELS = [
     "System.BuildVersion",
     "System.BuildDate",
     "System.FreeSpace",
-    "Weather.Conditions",
-    "Weather.Temperature",
-    "System.TotalUptime",
-    "System.Time(hh:mm:ss)",
-    "PVR.BackendDiskSpace",
-    "PVR.BackendTimers",
-    "PVR.BackendRecordings",
     ]
 
 
@@ -134,11 +139,6 @@ AUDIO_LABELS = [
     "MusicPlayer.Year",
     "MusicPlayer.Genre",
     "MusicPlayer.Cover",
-    "MusicPlayer.BitRate",
-    "MusicPlayer.BitsPerSample",
-    "MusicPlayer.SampleRate",
-    "MusicPlayer.Channels",
-    "MusicPlayer.PlaylistLength",
     ]
 
 
@@ -163,25 +163,6 @@ VIDEO_LABELS = [
     "VideoPlayer.Rating",
     "VideoPlayer.ParentalRating",
     "VideoPlayer.Cover",
-    "VideoPlayer.AudioChannels",
-    "VideoPlayer.Duration",
-    "VideoPlayer.PlayCount",
-    "Player.FinishTime",
-    "System.Time(hh:mm:ss)",
-    "Player.chapter",
-    "Player.chaptercount",
-    "Player.chaptername",
-    "System.Date",
-    "System.Uptime",
-    "System.CPUTemperature",
-    "System.CpuFrequency",
-    "system.BuildVersion",
-    "System.BuildDate",
-    "System.Time",
-    "Weather.Conditions",
-    "Weather.Temperature",
-    "System.TotalUptime",
-    "VideoPlayer.TimeRemaining",
     ]
 
 
@@ -653,6 +634,14 @@ def strcb_codec(info, screen_mode, layout_name):
             return info['MusicPlayer.Codec']
     return ""
 
+def strcb_achannelnumber(info, screen_mode, layout_name):
+    if 'MusicPlayer.Channels' in info:
+        if info['MusicPlayer.Channels'] in ch_N:
+            return ch_N[info['MusicPlayer.Channels']]
+        else:
+            return info['MusicPlayer.Channels']
+    return ""
+
 
 # Similar function for AudioCodec lookup when playing video
 
@@ -830,6 +819,7 @@ STRING_CB = {
     # Audio screen fields
     'codec'      : strcb_codec,
     'full_codec' : strcb_full_codec,
+    'achannelnumber':strcb_achannelnumber,
 
     # Video screen fields
     'acodec'     : strcb_acodec,
