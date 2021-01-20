@@ -1703,6 +1703,23 @@ def calc_progress(time_str, duration_str):
     else:
         return -1
 
+def calc_progress_pvr(time_str, duration_str):
+    if (time_str == "" or duration_str == ""):
+        return -1
+    if not (1 <= time_str.count(":") <= 2 and
+            1 <= duration_str.count(":") <= 2):
+        return -1
+
+    cur_secs   = sum(int(x) * 60 ** i for i, x in enumerate(reversed(time_str.split(':')))) - 600 #remove pvr start offset
+    total_secs = sum(int(x) * 60 ** i for i, x in enumerate(reversed(duration_str.split(':')))) -1200 #remove pvr start and stop offsets
+    if (total_secs > 0 and cur_secs > 0 and cur_secs <= total_secs): #recording finished, show progress bar
+        return cur_secs/total_secs
+    if (cur_secs < 0 or total_secs < 0 ): #recording just started, hide progress bar
+        return -1
+    if (cur_secs >= total_secs): #recording ongoing show full progress bar (100%)
+        return 1
+    else:
+        return -1
 
 # Activate display backlight, making use of luma's PWM capabilities if
 # enabled.  Note that scripts using hardware PWM on RPi are likely to
@@ -1876,9 +1893,10 @@ def update_display(touched=False):
             video_info = response['result']
 
             # See remarks in audio_screens() regarding calc_progress()
-            prog = calc_progress(
-                video_info["VideoPlayer.Time"],
-                video_info["VideoPlayer.Duration"])
+            if video_info["Player.Filenameandpath"].startswith("pvr://recordings"):
+                        prog = calc_progress_pvr(video_info["VideoPlayer.Time"], video_info["VideoPlayer.Duration"])
+            else:
+                       prog = calc_progress(video_info["VideoPlayer.Time"], video_info["VideoPlayer.Duration"])
 
             # There seems to be a hiccup in DLNA/UPnP playback in which a
             # change (or stopping playback) causes a moment when
