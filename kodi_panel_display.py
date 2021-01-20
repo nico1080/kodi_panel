@@ -658,6 +658,15 @@ def strcb_acodec(info, screen_mode, layout_name):
             return info['VideoPlayer.AudioCodec']
     return ""
 
+# Similar function for VideoCodec lookup when playing video
+
+def strcb_vcodec(info, screen_mode, layout_name):
+    if 'VideoPlayer.AudioCodec' in info:
+        if info['VideoPlayer.VideoCodec'] in codec_name.keys():
+            return codec_name[info['VideoPlayer.VideoCodec']]
+        else:
+            return info['VideoPlayer.VideoCodec']
+    return ""
 
 # Construct a string containing both the friendly codec name and, in
 # parenthesis, the bit depth and sample rate for the codec.
@@ -828,6 +837,7 @@ STRING_CB = {
 
     # Video screen fields
     'acodec'     : strcb_acodec,
+    'vcodec'     : strcb_vcodec,
 
     # Status screen fields
     'version'      : strcb_version,

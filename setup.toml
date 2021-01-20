@@ -695,11 +695,11 @@ prefix= "Video Codec "
 
 [shared_element.resolution]
 name = "VideoPlayer.VideoResolution"
-posx = 400
+posx = 340
 posy = 200
 font = "font_tiny"
 fill = "color_7S"
-format_str = "{VideoPlayer.VideoResolution}p {VideoPlayer.VideoCodec}"
+format_str = "{vcodec} {VideoPlayer.VideoResolution}p {VideoPlayer.VideoCodec}"
 
 
 [shared_element.acodec]
@@ -768,8 +768,8 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "chapter"
-[[V_LAYOUT.V_DEFAULT.fields]]
-shared_element = "vcodec"
+#[[V_LAYOUT.V_DEFAULT.fields]]
+#shared_element = "vcodec"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_DEFAULT.fields]]
@@ -850,8 +850,8 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "chapter"
-[[V_LAYOUT.V_PVR.fields]]
-shared_element = "vcodec"
+#[[V_LAYOUT.V_PVR.fields]]
+#shared_element = "vcodec"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_PVR.fields]]
@@ -883,8 +883,8 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "chapter"
-[[V_LAYOUT.V_LIVETV.fields]]
-shared_element = "vcodec"
+#[[V_LAYOUT.V_LIVETV.fields]]
+#shared_element = "vcodec"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -917,8 +917,8 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "chapter"
-[[V_LAYOUT.V_TV_SHOW.fields]]
-shared_element = "vcodec"
+#[[V_LAYOUT.V_TV_SHOW.fields]]
+#shared_element = "vcodec"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_TV_SHOW.fields]]
@@ -951,8 +951,8 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "chapter"
-[[V_LAYOUT.V_MOVIE.fields]]
-shared_element = "vcodec"
+#[[V_LAYOUT.V_MOVIE.fields]]
+#shared_element = "vcodec"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_MOVIE.fields]]
