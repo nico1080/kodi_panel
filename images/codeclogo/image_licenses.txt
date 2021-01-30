@@ -1,0 +1,21 @@
+The Kodi logo is an XBMC Foundation Trademark and is being used here
+in a non-commercial fashion, as kodi_panel is possible solely due to
+Kodi itself.  Note that kodi_panel is NOT a part of Kodi and has no
+relationship to the XBMC Foundation.
+
+The image file(s)
+
+- CD.png (http://www.softicons.com/toolbar-icons/soft-icons-by-lokas-software/cd-icon)
+  by Lokas Software
+
+are distributed under the Create Commons Attribution 3.0 license, as
+available here:
+
+  https://creativecommons.org/licenses/by/3.0/
+
+Codec logo are from confluence skin and distributed under GNU General Public License v2.0
+https://github.com/xbmc/skin.confluence
+
+
+Any image file not listed was available for distribution without
+attribution.
