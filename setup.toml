@@ -645,7 +645,6 @@ posx =400
 posy =360
 
 
-
 # --------------------------------------------------------------------
 #
 # Fullscreen artwork (by itself)
@@ -913,7 +912,12 @@ center_sm = 1
 
 [shared_element.acodeclogo]
 name = "acodeclogo"
-posx =400
+posx =430
+posy =360
+
+[shared_element.vcodeclogo]
+name = "vcodeclogo"
+posx =320
 posy =360
 
 # Default video info
@@ -941,7 +945,8 @@ shared_element = "vplaycount"
 shared_element = "finishtime"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "acodeclogo"
-
+[[V_LAYOUT.V_DEFAULT.fields]]
+shared_element = "vcodeclogo"
 
 [[V_LAYOUT.V_DEFAULT.fields]]
 name = "System.Time(hh:mm:ss)"
@@ -950,11 +955,6 @@ posy = 300
 font = "font_tiny"
 fill = "white"
 dynamic = 1
-
-[[V_LAYOUT.V_DEFAULT.fields]]
-name = "acodeclogo"
-posx =400
-posy =360
 
 
 ################################ PVR ##################################
@@ -980,6 +980,8 @@ shared_element = "vplaycount"
 shared_element = "finishtime"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "acodeclogo"
+[[V_LAYOUT.V_PVR.fields]]
+shared_element = "vcodeclogo"
 
 [[V_LAYOUT.V_PVR.fields]]
 name = "Player.FinishTime"
@@ -1023,6 +1025,8 @@ shared_element = "vplaycount"
 shared_element = "finishtime"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "acodeclogo"
+[[V_LAYOUT.V_LIVETV.fields]]
+shared_element = "vcodeclogo"
 
 [[V_LAYOUT.V_LIVETV.fields]]
 name = "timeshift"
@@ -1067,6 +1071,8 @@ shared_element = "vplaycount"
 shared_element = "finishtime"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "acodeclogo"
+[[V_LAYOUT.V_TV_SHOW.fields]]
+shared_element = "vcodeclogo"
 
 [[V_LAYOUT.V_TV_SHOW.fields]]
 name = "Player.FinishTime"
@@ -1109,6 +1115,8 @@ shared_element = "vplaycount"
 shared_element = "finishtime"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "acodeclogo"
+[[V_LAYOUT.V_MOVIE.fields]]
+shared_element = "vcodeclogo"
 
 
 

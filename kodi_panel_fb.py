@@ -80,7 +80,7 @@ def strcb_channelnumber(info, screen_mode, layout_name):
 kodi_panel_display.STRING_CB["channelnumber"] = strcb_channelnumber
 
 def strcb_vcodec(info, screen_mode, layout_name):
-    if 'VideoPlayer.AudioCodec' in info:
+    if 'VideoPlayer.VideoCodec' in info:
         if info['VideoPlayer.VideoCodec'] in kodi_panel_display.codec_name.keys():
             return kodi_panel_display.codec_name[info['VideoPlayer.VideoCodec']]
         else:
@@ -152,7 +152,7 @@ codec_logo = {
     "aac": "images/codeclogo/audio/aac.png",
     "pcm_s16be": "images/codeclogo/audio/pcm.png",
     "pcm_u8": "images/codeclogo/audio/pcm.png",
-    "h264": "images/codeclogo/audio/h264.png",
+    "h264": "images/codeclogo/video/h264.png",
     "wvc1": "images/codeclogo/video/wvc1.png",
     "vc1": "images/codeclogo/video/wvc1.png",
 }
@@ -176,6 +176,17 @@ def element_acodeclogo(image, draw, info, field, screen_mode, layout_name):
 
 kodi_panel_display.ELEMENT_CB["acodeclogo"] = element_acodeclogo
 
+def element_vcodeclogo(image, draw, info, field, screen_mode, layout_name):
+    if 'VideoPlayer.VideoCodec' in info:
+        if info['VideoPlayer.VideoCodec'] in codec_logo:
+            logoimg = Image.open(codec_logo[info['VideoPlayer.VideoCodec']])
+            image.paste(logoimg, (field["posx"], field["posy"]))
+            return ""
+        else:
+            return ""
+    return ""
+
+kodi_panel_display.ELEMENT_CB["vcodeclogo"] = element_vcodeclogo
 #-----------------------------------------------------------------------------
 
 # Use a Linux framebuffer via luma.core.device
