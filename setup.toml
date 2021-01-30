@@ -156,16 +156,7 @@ ENABLE_IDLE_STATUS = true
 	 "Player.chapter",
 	 "Player.chaptercount",
 	 "Player.chaptername",
-	 "System.Date",
-	 "System.Uptime",
-	 "System.CPUTemperature",
-	 "System.CpuFrequency",
-	 "system.BuildVersion",
-	 "System.BuildDate",
 	 "System.Time",
-	 "Weather.Conditions",
-	 "Weather.Temperature",
-	 "System.TotalUptime",
    "PVR.EpgEventDuration",
    "PVR.EpgEventElapsedTime",
    "PVR.TimeShiftOffset",
@@ -825,9 +816,9 @@ fill = "color_7S"
 [shared_element.vtitle]
 name  = "VideoPlayer.Title"
 posx  = 4
-posy  = 400
+posy  = 410
 font  = "font_bold"
-fill  = "color_7S"
+fill  = "white"
 wrap  = 1
 max_width = 635
 max_lines = 1
@@ -838,7 +829,7 @@ format_str = "chapter {Player.chapter}/{Player.chaptercount} {Player.chaptername
 posx  = 340
 posy  = 180
 font  = "font_tiny"
-fill  = "color_7S"
+fill  = "white"
 dynamic = 1
 display_ifnot = [ "Player.chaptercount", "00" ]
 
@@ -847,7 +838,7 @@ name = "vcodec"   # special treatment in audio_screens()
 posx = 340
 posy = 200
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 prefix= "Video Codec "
 
 [shared_element.resolution]
@@ -855,7 +846,7 @@ name = "VideoPlayer.VideoResolution"
 posx = 340
 posy = 200
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 format_str = "{vcodec} {VideoPlayer.VideoResolution}p"
 
 
@@ -864,7 +855,7 @@ name = "VideoPlayer.Title"   # special treatment in audio_screens()
 posx = 340
 posy = 220
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 format_str = "{channelnumber} {acodec}  "
 
 
@@ -873,7 +864,7 @@ name = "channelnumber"
 posx = 340
 posy = 220
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 format_str = "{channelnumber} {acodec}  "
 
 
@@ -882,7 +873,7 @@ name = "VideoPlayer.PlayCount"
 posx = 340
 posy = 280
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 prefix = "Play count: "
 suffix = ""
 
@@ -891,7 +882,7 @@ name = "Player.FinishTime"
 posx = 340
 posy = 300
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 prefix = "End "
 suffix = ""
 dynamic = 1
@@ -943,7 +934,7 @@ name = "System.Time(hh:mm:ss)"
 posx = 480
 posy = 300
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 dynamic = 1
 
 
@@ -974,7 +965,7 @@ name = "Player.FinishTime"
 posx = 340
 posy = 340
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 format_str = "PVR      Current: {System.Time}"
 dynamic = 1
 
@@ -988,7 +979,7 @@ name = "PVR.EpgEventElapsedTime"
 posx = 330
 posy = 31
 font = "font7S"
-fill = "color_7S"
+fill = "white"
 dynamic = 1
 
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -996,7 +987,7 @@ name = "PVR.EpgEventDuration"
 posx = 330
 posy = 104
 font = "font7S"
-fill = "color_7S"
+fill = "white"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "vtitle"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -1016,7 +1007,7 @@ format_str = "Timeshift: {PVR.TimeShiftOffset} sec "
 posx  = 340
 posy  = 320
 font  = "font_tiny"
-fill  = "color_7S"
+fill  = "white"
 dynamic = 1
 display_ifnot = [ "timeshiftcheck", "true"]
 
@@ -1025,7 +1016,7 @@ name = "Player.FinishTime"
 posx = 340
 posy = 340
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 prefix = "Live TV "
 suffix = ""
 dynamic = 1
@@ -1057,10 +1048,18 @@ name = "Player.FinishTime"
 posx = 340
 posy = 340
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 prefix = "série "
 suffix = ""
 dynamic = 1
+
+[[V_LAYOUT.V_TV_SHOW.fields]]
+name  = "episode"
+posx  = 4
+posy  = 350
+font  = "font_sm"
+fill  = "color_artist"
+format_str = "{VideoPlayer.TVShowTitle} S{VideoPlayer.Season}E{VideoPlayer.Episode}"
 
 ################################ MOVIES ##################################
 [V_LAYOUT.V_MOVIE.thumb]   # artwork / movie poster
@@ -1091,7 +1090,7 @@ name = "Player.FinishTime"
 posx = 340
 posy = 340
 font = "font_tiny"
-fill = "color_7S"
+fill = "white"
 prefix = "movie "
 suffix = ""
 dynamic = 1
