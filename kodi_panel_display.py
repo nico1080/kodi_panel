@@ -24,10 +24,10 @@
 # ----------------------------------------------------------------------------
 
 import sys
-try:
-    import RPi.GPIO as GPIO
-except ImportError:
-    pass
+#try:
+#    import RPi.GPIO as GPIO
+#except ImportError:
+#    pass
 
 from luma.core.device import device
 from PIL import Image
@@ -730,7 +730,7 @@ def strcb_upnp_playback(info, screen_mode, layout_name):
         else:
             return "0"
     return "0"
-    
+
 # Perform a table lookup to convert Kodi's codec names into more
 # common names.
 def strcb_codec(info, screen_mode, layout_name):
@@ -803,7 +803,7 @@ def element_audio_artist(image, draw, info, field, screen_mode, layout_name):
         # and UPnP/DLNA playback via Kodi didn't quite permit this
         # to work, unfortunately.
         display_string = ""
-        
+
         if info['MusicPlayer.Artist'] != "":
             display_string = info['MusicPlayer.Artist']
 
@@ -2456,7 +2456,7 @@ def update_display(touched=False):
         # print("Response: ", json.dumps(response))
         try:
             track_info = response['result']
-            
+
             if ((# There seems to be a hiccup in DLNA/UPnP playback in
                 # which a track change (or stopping playback) causes a
                 # moment when nothing is actually playing, according to
@@ -2640,7 +2640,7 @@ def main(device_handle):
                 print(datetime.now(), "Unexpected error: ", sys.exc_info()[0])
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-                print(exc_type, fname, exc_tb.tb_lineno)                
+                print(exc_type, fname, exc_tb.tb_lineno)
                 pass
 
             # If connecting to Kodi over an actual network connection,
