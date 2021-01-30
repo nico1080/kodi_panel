@@ -856,16 +856,16 @@ posx = 340
 posy = 200
 font = "font_tiny"
 fill = "color_7S"
-format_str = "{vcodec} {VideoPlayer.VideoResolution}p {VideoPlayer.VideoCodec}"
+format_str = "{vcodec} {VideoPlayer.VideoResolution}p"
 
 
 [shared_element.acodec]
 name = "VideoPlayer.Title"   # special treatment in audio_screens()
-posx = 375
+posx = 340
 posy = 220
 font = "font_tiny"
 fill = "color_7S"
-format_str = " {acodec} test {channelnumber}"
+format_str = "{channelnumber} {acodec}  "
 
 
 [shared_element.channelnumber]
@@ -874,6 +874,7 @@ posx = 340
 posy = 220
 font = "font_tiny"
 fill = "color_7S"
+format_str = "{channelnumber} {acodec}  "
 
 
 [shared_element.vplaycount]
@@ -927,14 +928,10 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "chapter"
-#[[V_LAYOUT.V_DEFAULT.fields]]
-#shared_element = "vcodec"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "acodec"
-[[V_LAYOUT.V_DEFAULT.fields]]
-shared_element = "channelnumber"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_DEFAULT.fields]]
@@ -950,54 +947,6 @@ fill = "color_7S"
 dynamic = 1
 
 
-[[V_LAYOUT.V_DEFAULT.fields]]
-name = "System.Date"
-posx = 5
-posy = 170
-format_str = "{System.Date}, {System.Time}"
-font = "font_tiny"
-fill = "color_7S"
-dynamic = 1
-
-[[V_LAYOUT.V_DEFAULT.fields]]
-name = "System.Uptime"
-posx = 5
-posy = 200
-format_str = "Up: {System.Uptime}"
-font = "font_tiny"
-fill = "color_7S"
-dynamic = 1
-
-[[V_LAYOUT.V_DEFAULT.fields]]
-name = "System.TotalUptime"
-posx = 5
-posy = 230
-format_str = "total: {System.TotalUptime}"
-font = "font_tiny"
-fill = "color_7S"
-dynamic = 1
-wrap  = 1
-max_width = 300
-max_lines = 1
-
-[[V_LAYOUT.V_DEFAULT.fields]]
-name = "System.CPUTemperature"
-posx = 5
-posy = 260
-format_str = "CPU: {System.CPUTemperature}, {System.CpuFrequency}"
-font = "font_tiny"
-fill = "color_7S"
-dynamic = 1
-
-[[V_LAYOUT.V_DEFAULT.fields]]
-name = "Weather.Temperature"
-posx = 5
-posy = 280
-format_str = "{Weather.Conditions}, {Weather.Temperature}"
-font = "font_tiny"
-fill = "color_7S"
-dynamic = 1
-
 ################################ PVR ##################################
 [V_LAYOUT.V_PVR.thumb]   # artwork / movie poster
 shared_element = "thumb"
@@ -1011,14 +960,10 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "chapter"
-#[[V_LAYOUT.V_PVR.fields]]
-#shared_element = "vcodec"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "acodec"
-[[V_LAYOUT.V_PVR.fields]]
-shared_element = "channelnumber"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_PVR.fields]]
@@ -1056,14 +1001,10 @@ fill = "color_7S"
 shared_element = "vtitle"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "chapter"
-#[[V_LAYOUT.V_LIVETV.fields]]
-#shared_element = "vcodec"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "acodec"
-[[V_LAYOUT.V_LIVETV.fields]]
-shared_element = "channelnumber"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -1102,14 +1043,10 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "chapter"
-#[[V_LAYOUT.V_TV_SHOW.fields]]
-#shared_element = "vcodec"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "acodec"
-[[V_LAYOUT.V_TV_SHOW.fields]]
-shared_element = "channelnumber"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_TV_SHOW.fields]]
@@ -1138,14 +1075,10 @@ shared_element = "duration"
 shared_element = "vtitle"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "chapter"
-#[[V_LAYOUT.V_MOVIE.fields]]
-#shared_element = "vcodec"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "resolution"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "acodec"
-[[V_LAYOUT.V_MOVIE.fields]]
-shared_element = "channelnumber"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "vplaycount"
 [[V_LAYOUT.V_MOVIE.fields]]
