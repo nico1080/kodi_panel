@@ -60,6 +60,16 @@ def strcb_channelnumber(info, screen_mode, layout_name):
 
 kodi_panel_display.STRING_CB["channelnumber"] = strcb_channelnumber
 
+def strcb_vcodec(info, screen_mode, layout_name):
+    if 'VideoPlayer.AudioCodec' in info:
+        if info['VideoPlayer.VideoCodec'] in kodi_panel_display.codec_name.keys():
+            return kodi_panel_display.codec_name[info['VideoPlayer.VideoCodec']]
+        else:
+            return info['VideoPlayer.VideoCodec']
+    return ""
+
+kodi_panel_display.STRING_CB["vcodec"] = strcb_vcodec
+
 
 #-----------------------------------------------------------------------------
 
