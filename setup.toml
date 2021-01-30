@@ -837,6 +837,7 @@ posy  = 180
 font  = "font_tiny"
 fill  = "color_7S"
 dynamic = 1
+display_ifnot = [ "Player.chaptercount", "00" ]
 
 [shared_element.vcodec]
 name = "vcodec"   # special treatment in audio_screens()
