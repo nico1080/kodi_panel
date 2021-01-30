@@ -70,6 +70,43 @@ def strcb_vcodec(info, screen_mode, layout_name):
 
 kodi_panel_display.STRING_CB["vcodec"] = strcb_vcodec
 
+#------------Custom progress_bar---------------------
+def calc_progress_custom(time_str, duration_str, layout_name):
+    if (time_str == "" or duration_str == ""):
+        return -1
+    if not (1 <= time_str.count(":") <= 2 and
+            1 <= duration_str.count(":") <= 2):
+        return -1
+
+    cur_secs = sum(
+        int(x) * 60 ** i for i,
+        x in enumerate(
+            reversed(
+                time_str.split(':'))))
+    total_secs = sum(
+        int(x) * 60 ** i for i,
+        x in enumerate(
+            reversed(
+                duration_str.split(':'))))
+    if layout_name == "V_PVR":
+        cur_secs -= 600 #remove pvr start offset
+        total_secs -= 1200 #remove pvr start and stop offsets
+
+        
+    # If either cur_secs or total_secs is negative, we fall through
+    # and return -1, hiding the progress bar.  We do explicitly cap
+    # the maximum progress that is possible at 1.
+
+    if (cur_secs >= 0 and total_secs > 0):
+        if (cur_secs >= total_secs):
+            return 1
+        else:
+            return cur_secs / total_secs
+    else:
+        return -1
+
+kodi_panel_display.calc_progress  = calc_progress_custom
+
 
 #-----------------------------------------------------------------------------
 
