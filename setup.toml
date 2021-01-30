@@ -166,6 +166,9 @@ ENABLE_IDLE_STATUS = true
 	 "Weather.Conditions",
 	 "Weather.Temperature",
 	 "System.TotalUptime",
+   "PVR.EpgEventDuration",
+   "PVR.EpgEventElapsedTime",
+   "PVR.TimeShiftOffset",
 	 "VideoPlayer.TimeRemaining",
 	 ]
 
@@ -1036,9 +1039,19 @@ shared_element = "thumb"
 [V_LAYOUT.V_LIVETV.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_LIVETV.fields]]
-shared_element = "time"
+name = "PVR.EpgEventElapsedTime"
+posx = 330
+posy = 31
+font = "font7S"
+fill = "color_7S"
+dynamic = 1
+
 [[V_LAYOUT.V_LIVETV.fields]]
-shared_element = "duration"
+name = "PVR.EpgEventDuration"
+posx = 330
+posy = 104
+font = "font7S"
+fill = "color_7S"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "vtitle"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -1055,6 +1068,16 @@ shared_element = "channelnumber"
 shared_element = "vplaycount"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "finishtime"
+
+[[V_LAYOUT.V_LIVETV.fields]]
+name = "timeshift"
+format_str = "Timeshift: {PVR.TimeShiftOffset} sec "
+posx  = 340
+posy  = 320
+font  = "font_tiny"
+fill  = "color_7S"
+dynamic = 1
+display_ifnot = [ "timeshiftcheck", "true"]
 
 [[V_LAYOUT.V_LIVETV.fields]]
 name = "Player.FinishTime"

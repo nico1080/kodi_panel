@@ -70,6 +70,16 @@ def strcb_vcodec(info, screen_mode, layout_name):
 
 kodi_panel_display.STRING_CB["vcodec"] = strcb_vcodec
 
+def strcb_timeshiftcheck(info, screen_mode, layout_name):
+    if 'PVR.TimeShiftOffset' in info:
+        if info['PVR.TimeShiftOffset'].startswith("00:0"):
+            return "true"
+    return ""
+
+kodi_panel_display.STRING_CB["timeshiftcheck"] = strcb_timeshiftcheck
+
+
+
 #------------Custom progress_bar---------------------
 def calc_progress_custom(time_str, duration_str, layout_name):
     if (time_str == "" or duration_str == ""):
@@ -92,7 +102,7 @@ def calc_progress_custom(time_str, duration_str, layout_name):
         cur_secs -= 600 #remove pvr start offset
         total_secs -= 1200 #remove pvr start and stop offsets
 
-        
+
     # If either cur_secs or total_secs is negative, we fall through
     # and return -1, hiding the progress bar.  We do explicitly cap
     # the maximum progress that is possible at 1.
