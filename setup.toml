@@ -90,12 +90,18 @@ HW_PWM_LEVEL = 0.55
 #
 
 # Audio and video screens are enabled and disabled separately.
+#
+# Slideshow screens are also possible, controlled by yet another
+# layout (or layouts).
+#
 ENABLE_AUDIO_SCREENS = true
 ENABLE_VIDEO_SCREENS = true
+ENABLE_SLIDESHOW_SCREENS = true
 
 # Should the idle status screen always be shown?  That could be
 # desired if no touch interrupt is available.
-ENABLE_IDLE_STATUS = false
+ENABLE_IDLE_STATUS = true
+
 
 # The script has built-in lists of Kodi InfoLabels to retrieve for the
 # various screens that are possible, defined at the beginning of the
@@ -173,6 +179,7 @@ DEFAULT_AIRPLAY = "images/airplay_thumb.png"    # Airplay file w/o artwork
 
 
 # Audio Layout Names
+# ------------------
 #
 #   Specify the names of layouts that are available when playing an
 #   audio file.  The strings used must correspond to those used within
@@ -190,6 +197,8 @@ ALAYOUT_INITIAL = "A_DEFAULT"
 
 
 # Video Layout Names
+# ------------------
+
 #
 #   Similar to audio screen modes above, except for the
 #   following tidbit ...
@@ -198,14 +207,11 @@ ALAYOUT_INITIAL = "A_DEFAULT"
 #   video_screens() function) based upon which InfoLabel fields are
 #   populated?  If so, then set VLAYOUT_AUTOSELECT to true.
 #
-#   If that flag is set to true, then VLAYOUT_NAMES *MUST* be
+#   If that flag is set to true, then VLAYOUT_NAMES should be
 #   populated with entries that match the heuristic if-then that is
-#   used by video_screens().  Top-level entries must be as follows:
+#   used by video_screens().
 #
-#     - Whatever VLAYOUT_INITIAL specifies below, for Movies
-#     - "V_PVR", for PVR / Recorded TV shows
-#     - "V_TV_SHOW", for Library TV shows
-#
+
 #   If that variable is to false or left undeclared, then video modes
 #   just form a cycle that gets advanced via the touch interrupt, as
 #   happens for the audio screens.
@@ -229,6 +235,30 @@ VLAYOUT_INITIAL = "V_DEFAULT"
 
 #[STATUS_LAYOUT.thumb]
 #[[V_LAYOUT.V_DEFAULT.fields]]
+
+# Slideshow Layout Names
+# ----------------------
+#
+#   Similar to audio screen modes and video screen modes
+#
+
+SLAYOUT_AUTOSELECT = false
+SLAYOUT_NAMES = [ "DEFAULT" ]
+SLAYOUT_INITIAL = "DEFAULT"
+
+
+
+# Codec Lookup
+#
+#   The codec_name lookup table can be augmented, or existing entries
+#   changed.  The style of entries is identical to what is done for
+#   the COLORS table below.
+#
+[CODECS]
+"vc1" = "VC1"
+#"dtshd_hra" = "DTS-xxxHRA"
+
+
 
 # Colors
 #
@@ -291,6 +321,60 @@ VLAYOUT_INITIAL = "V_DEFAULT"
 
 
 # --------------------------------------------------------------------
+# Shared Elements
+#
+#   The intent of the shared_element table (which becomes a dictionary
+#   in Python) is to define display elements that can be used by
+#   multiple layouts.
+#
+#   The details of each entry must correspond to what one would
+#   normally populate within a layout (e.g., a textfield needs a name,
+#   posx, posy, font, fill, etc).
+#
+#   With any layout that desired to use such an element, one
+#   references it by the name (key) given to it within the
+#   shared_element table.  For instance, defining a shared progress
+#   bar and elapsed time display could be done as follows:
+#
+#     [shared_element.elapsed_time]
+#      name = "MusicPlayer.Time"
+#      posx = 420
+#      posy = 36
+#      font = "font7S"
+#      fill = "color_7S"
+#      dynamic = 1
+#
+#     [shared_element.progress_bar]
+#      posx   = 420
+#      posy   = 8
+#      height = 12
+#      short_len = 196
+#      long_len  = 300
+#      color_fg = "color_7S"
+#      color_bg = "color_gray"
+#
+#   Given the above definitions, a layout can then include a shared
+#   element by refering to it by name (with no other keys listed).
+#   Here is an example, which includes one normal directly-specified
+#   element.
+#
+#     [A_LAYOUT.A_FULLSCREEN.thumb]
+#     center = 1
+#     size = 480
+#
+#     [A_LAYOUT.A_FULLSCREEN.prog]
+#      shared_element = "progress_bar"
+#
+#     [[A_LAYOUT.A_FULLSCREEN.fields]]
+#      shared_element = "elapsed_time"
+#
+#
+# [shared_element.replace_name]
+#
+
+
+
+# --------------------------------------------------------------------
 # Audio Screens
 #
 #   This data structure gets used by audio_screens() to control the
@@ -298,19 +382,34 @@ VLAYOUT_INITIAL = "V_DEFAULT"
 #   be omitted from a screen just by commenting it out here, particular
 #   for text fields.
 #
-#   Top-level entries within this A_LAYOUT table MUST have names that
-#   correspond to the ALAYOUT_NAMES list specified earlier in this
-#   file.
+#   Entries within the "fields" array generally correspond to text
+#   fields, but the introduction of the ELEMENT_CB lookup table (if
+#   customized) does permit for additional graphical elements.  Such
+#   customization does require a bit of Python programming.
 #
-#   New top-level content requires corresponding changes to
-#   audio_screens().  If a completely new text field is desired, then
-#   the JSON-RPC call made in update_display() needs to be updated as
-#   well.
+#   Note that the available InfoLabels can be augmented via use of
+#   the AUDIO_LABELS list (see earlier in this file).
 #
-#   All entries within the "fields" array below correspond to text
-#   fields, with the 'name' key generally corresponding to one of the
-#   retrieved InfoLabels.  Each entry is a little dictionary that can
-#   specify the following entries:
+#   All entries in the "fields" array" MUST have a name (either
+#   specified explicitly or inherited from a shared element
+#   reference).  The 'name' key corresponds to ONE of the following:
+#
+#     - An exact match for one of the InfoLabels retrieved from Kodi.
+#       The entry is only rendered if the corresponding InfoLabel is
+#       non-empty.
+#
+#     - An exact match for one of the callback functions named in the
+#       ELEMENT_CB table or the STRING_CB table.  That match triggers
+#       execution of the corresponding callback function.
+#
+#     - An arbitrary string (not matching an InfoLabel or any callback
+#       function names), provided that the entry ALSO specifies a
+#       'format_str' key.  The interpolated format_str always gets
+#       rendered.
+#
+#   The execution path followed by any of the above naming choices is
+#   typically expected to yield a text string to display.  Remaining
+#   keys that control the rendering of that text are as follows:
 #
 #      posx     X-coordinate for display (horizontal position)
 #      posy     Y-coordinate for display (vertical position)
@@ -325,10 +424,16 @@ VLAYOUT_INITIAL = "V_DEFAULT"
 #      suffix   Optional string following InfoLabel text
 #
 #      format_str Alternatively, rather than using prefix and suffix,
-#                 one has the option of using a format_str.  The
-#                 string should contain one or more InfoLabels to
-#                 substitute, enclosed within curly braces.  See the
-#                 status layout screen text fields for examples.
+#                 and if one is NOT triggering a callback function, a
+#                 formatting string can be specified.  The string
+#                 should contain one or more InfoLabels to substitute,
+#                 enclosed within curly braces.  See the status layout
+#                 screen text fields for examples.
+#
+#                 Terms to be substituted can also make use of any
+#                 entries defined within the string-manipulation
+#                 callback table (see the STRING_CB dictionary in
+#                 kodi_panel_display.py)
 #
 #      trunc    Flag indicating that single line string should
 #               truncated at the right-hand edge of the display
@@ -352,10 +457,60 @@ VLAYOUT_INITIAL = "V_DEFAULT"
 #      lfont    Font for label string
 #      lfill    Font fill color for label string
 #
+#      exclude  A string or an array strings that, if the text to
+#               be displayed exactly matches, causes the element to
+#               not be drawn.
 #
-#   Special treatment exists for the 'codec' and 'artist' text fields.
+#      display_if / display_ifnot
+#               An alternative mechanism for controlling element
+#               display.  The value must be a two-element list
+#               providing two strings.
+#
+#               The first string must be either an InfoLabel or a
+#               string callback function (entry in STRING_CB).
+#
+#               The second string is then compared for equality (or
+#               inequality, when using ifnot) against the string
+#               resulting from "evaluating" the InfoLabel or callback
+#               function.
+#
+#               An example:
+#
+#                 display_if = [ "MusicPlayer.TrackNumber", "02" ]
+#
+#
+#   Internal callbacks are used for the 'codec' and 'artist' text
+#   fields.  End-user scripts are free to augment or modify the
+#   callback tables (look for ELEMENT_CB and STRING_CB).
 #
 # --------------------------------------------------------------------
+#
+# Background
+#
+#   Every layout, including the status screens, can optional specify a
+#   background entry at the top-level.  A few examples are as follows:
+#
+#     [A_LAYOUT.A_FULLSCREEN.background]
+#      fill = "navy"        # uniform fill color
+#
+#   or
+#
+#     [A_LAYOUT.A_FULLSCREEN.background]
+#      rectangle = 1        # rectangle with frame/border
+#      fill = "navy"
+#      outline = "yellow"
+#      width = 3
+#
+#   or
+#
+#     [STATUS_LAYOUT.background]
+#      image = "images/mickey-sprite.png"   # assumed sized correctly
+#
+#
+#   As shown, the entry must be named "background".
+#
+# --------------------------------------------------------------------
+
 
 #
 # Default audio info screen
@@ -522,7 +677,7 @@ color_bg = "color_gray"
 
 # --------------------------------------------------------------------
 #
-# The A_NOTIME screen servers primarily as an example, It is similar
+# The A_NOTIME screen serves primarily as an example, It is similar
 # to the default (audio) info screen, but without the elapsed time
 # display.
 #
@@ -568,7 +723,7 @@ font = "font_tiny"
 fill = "white"
 
 [[A_LAYOUT.A_NOTIME.fields]]
-name = "codec"   # special treatment in audio_screens()
+name = "codec"   # internal callback
 posx = 580
 posy = 58
 font = "font_tiny"
@@ -612,7 +767,7 @@ trunc = 1
 #
 
 [[A_LAYOUT.A_NOTIME.fields]]
-name  = "artist"   # special treatment in audio_screens()
+name  = "artist"   # internal callback
 posx  = 420
 posy  = 240
 font  = "font_sm"
@@ -1000,7 +1155,12 @@ center = 1
 #   that appears following a screen touch when idle.  The screen
 #   gets drawn by status_screen().
 #
-#   Special treatment exists for several field names
+#   Note that the dynamic flag for entries below (if present) is
+#   just ignored for the status screen.  Everything is redrawn
+#   on each update loop.
+#
+#   Internal callbacks are used for several fields.
+#
 #
 ################################ STATUS ##################################
 
@@ -1010,7 +1170,7 @@ posy = 5
 size = 128
 
 [[STATUS_LAYOUT.fields]]
-name = "version"        # special treatment
+name = "version"        # internal callback
 posx = 145
 posy = 8
 font = "font_main"
@@ -1018,7 +1178,7 @@ fill = "color_artist"
 
 
 [[STATUS_LAYOUT.fields]]
-name = "summary"        # special treatment
+name = "summary"
 posx = 145
 posy = 40
 font = "font_main"
@@ -1106,3 +1266,55 @@ format_str = "Recordings: {PVR.BackendRecordings} Coming: {PVR.BackendTimers}"
 font = "font_sm"
 fill = "white"
 dynamic = 0
+
+# --------------------------------------------------------------------
+# Slideshow Screen Content
+#
+#   Similar to audio layout above, but used when a photo slideshow
+#   is in progress.
+#
+
+[S_LAYOUT.DEFAULT.background]
+fill = "navy"
+
+# This example shows the use of an arbitrary `name` when
+# specifying a `format_str`
+[[S_LAYOUT.DEFAULT.fields]]
+name = "greeting"
+posx = 5
+posy = 0
+format_str = "Slideshow"
+font = "font_bold"
+fill = "white"
+
+[[S_LAYOUT.DEFAULT.fields]]
+name = "Slideshow.CameraModel"
+posx = 5
+posy = 130
+prefix = "Camera: "
+font = "font_sm"
+fill = "white"
+
+[[S_LAYOUT.DEFAULT.fields]]
+name = "Slideshow.Aperture"
+posx = 5
+posy = 170
+prefix = "Aperture: "
+font = "font_sm"
+fill = "white"
+
+[[S_LAYOUT.DEFAULT.fields]]
+name = "Slideshow.ExposureTime"
+posx = 5
+posy = 210
+prefix = "Exposure: "
+font = "font_sm"
+fill = "white"
+
+[[S_LAYOUT.DEFAULT.fields]]
+name = "Slideshow.Resolution"
+posx = 5
+posy = 250
+prefix = "Resolution: "
+font = "font_sm"
+fill = "white"
