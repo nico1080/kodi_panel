@@ -165,7 +165,13 @@ def element_acodeclogo(image, draw, info, field, screen_mode, layout_name):
             return ""
         else:
             return ""
-
+    if 'MusicPlayer.Codec' in info:
+        if info['MusicPlayer.Codec'] in codec_logo:
+            logoimg = Image.open(codec_logo[info['MusicPlayer.Codec']])
+            image.paste(logoimg, (field["posx"], field["posy"]))
+            return ""
+        else:
+            return ""
     return ""
 
 kodi_panel_display.ELEMENT_CB["acodeclogo"] = element_acodeclogo

@@ -639,6 +639,11 @@ wrap  = 1
 max_width = 630
 max_lines = 1
 
+[[A_LAYOUT.A_DEFAULT.fields]]
+name = "acodeclogo"
+posx =400
+posy =360
+
 
 
 # --------------------------------------------------------------------
