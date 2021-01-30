@@ -30,7 +30,38 @@ from time import sleep
 import config
 import kodi_panel_display
 
-# ----------------------------------------------------------------------------
+# -------------------------------custom_function-----------------------------
+# channel number lookup
+ch_N = {
+    "1"      : "1.0",
+    "2"      : "2.0",
+    "3"      : "2.1",
+    "4"      : "3.1",
+    "5"      : "4.1",
+    "6"      : "5.1",
+    "7"      : "6.1",
+    "8"      : "7.1",
+    "10"     : "9.1",
+}
+
+
+def strcb_channelnumber(info, screen_mode, layout_name):
+    if 'MusicPlayer.Channels' in info:
+        if info['MusicPlayer.Channels'] in ch_N:
+            return ch_N[info['MusicPlayer.Channels']]
+        else:
+            return info['MusicPlayer.Channels']
+    if 'VideoPlayer.AudioChannels' in info:
+        if info['VideoPlayer.AudioChannels'] in ch_N:
+            return ch_N[info['VideoPlayer.AudioChannels']]
+        else:
+            return info['VideoPlayer.AudioChannels']
+    return ""
+
+kodi_panel_display.STRING_CB["channelnumber"] = strcb_channelnumber
+
+
+#-----------------------------------------------------------------------------
 
 # Use a Linux framebuffer via luma.core.device
 device = device.linux_framebuffer("/dev/fb0",bgr=1)
