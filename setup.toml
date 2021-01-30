@@ -198,7 +198,6 @@ ALAYOUT_INITIAL = "A_DEFAULT"
 
 # Video Layout Names
 # ------------------
-
 #
 #   Similar to audio screen modes above, except for the
 #   following tidbit ...
@@ -211,7 +210,6 @@ ALAYOUT_INITIAL = "A_DEFAULT"
 #   populated with entries that match the heuristic if-then that is
 #   used by video_screens().
 #
-
 #   If that variable is to false or left undeclared, then video modes
 #   just form a cycle that gets advanced via the touch interrupt, as
 #   happens for the audio screens.
@@ -903,16 +901,18 @@ long_len  = 300  # length when elapsed time matches 00:00:00 (hrs, mins, seconds
 color_fg = "color_7S"
 color_bg = "color_gray"
 #
-# Default video info
-#
-################################ DEFAULT ##################################
-[V_LAYOUT.V_DEFAULT.thumb]   # artwork / movie poster
+[shared_element.thumb]   # artwork / movie poster
 posx = 0
 posy = 0
 width  = 320
 height = 480
 center_sm = 1
 
+# Default video info
+#
+################################ DEFAULT ##################################
+[V_LAYOUT.V_DEFAULT.thumb]   # artwork / movie poster
+shared_element = "thumb"
 [V_LAYOUT.V_DEFAULT.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_DEFAULT.fields]]
@@ -995,6 +995,8 @@ fill = "color_7S"
 dynamic = 1
 
 ################################ PVR ##################################
+[V_LAYOUT.V_PVR.thumb]   # artwork / movie poster
+shared_element = "thumb"
 [V_LAYOUT.V_PVR.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_PVR.fields]]
@@ -1028,6 +1030,8 @@ format_str = "PVR      Current: {System.Time}"
 dynamic = 1
 
 ################################ LIVE TV ##################################
+[V_LAYOUT.V_LIVETV.thumb]   # artwork / movie poster
+shared_element = "thumb"
 [V_LAYOUT.V_LIVETV.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -1062,6 +1066,8 @@ suffix = ""
 dynamic = 1
 
 ################################ TV SHOWS ##################################
+[V_LAYOUT.V_TV_SHOW.thumb]   # artwork / movie poster
+shared_element = "thumb"
 [V_LAYOUT.V_TV_SHOW.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_TV_SHOW.fields]]
@@ -1096,6 +1102,8 @@ suffix = ""
 dynamic = 1
 
 ################################ MOVIES ##################################
+[V_LAYOUT.V_MOVIE.thumb]   # artwork / movie poster
+shared_element = "thumb"
 [V_LAYOUT.V_MOVIE.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_MOVIE.fields]]
@@ -1131,12 +1139,7 @@ prefix = "movie "
 suffix = ""
 dynamic = 1
 
-[V_LAYOUT.V_MOVIE.thumb]   # artwork / movie poster
-posx = 0
-posy = 0
-width  = 320
-height = 480
-center_sm = 1
+
 
 # Fullscreen movie poster only
 #
