@@ -161,6 +161,7 @@ ENABLE_IDLE_STATUS = true
    "PVR.EpgEventElapsedTime",
    "PVR.TimeShiftOffset",
 	 "VideoPlayer.TimeRemaining",
+   "VideoPlayer.Plot",
 	 ]
 
 
@@ -909,6 +910,17 @@ width  = 320
 height = 480
 center_sm = 1
 
+[shared_element.plot]
+name= "VideoPlayer.Plot"
+posx = 10
+posy = 10
+font  = "font_bold"
+fill  = "white"
+trunc  = 1
+wrap = 1
+max_width = 310
+max_lines = 8
+
 
 [shared_element.acodeclogo]
 name = "acodeclogo"
@@ -948,6 +960,7 @@ shared_element = "acodeclogo"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "vcodeclogo"
 
+
 [[V_LAYOUT.V_DEFAULT.fields]]
 name = "System.Time(hh:mm:ss)"
 posx = 480
@@ -982,6 +995,8 @@ shared_element = "finishtime"
 shared_element = "acodeclogo"
 [[V_LAYOUT.V_PVR.fields]]
 shared_element = "vcodeclogo"
+[[V_LAYOUT.V_PVR.fields]]
+shared_element = "plot"
 
 [[V_LAYOUT.V_PVR.fields]]
 name = "Player.FinishTime"
