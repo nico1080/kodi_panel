@@ -909,6 +909,7 @@ posy = 0
 width  = 320
 height = 480
 center_sm = 1
+display_ifnot = [ "VideoPlayer.Cover", "DefaultVideoCover.png"]
 
 [shared_element.plot]
 name= "VideoPlayer.Plot"
@@ -920,6 +921,7 @@ trunc  = 1
 wrap = 1
 max_width = 310
 max_lines = 8
+display_if = [ "VideoPlayer.Cover", "DefaultVideoCover.png"]
 
 
 [shared_element.acodeclogo]
@@ -1017,7 +1019,7 @@ name = "PVR.EpgEventElapsedTime"
 posx = 330
 posy = 31
 font = "font7S"
-fill = "white"
+fill = "color_7S"
 dynamic = 1
 
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -1025,7 +1027,7 @@ name = "PVR.EpgEventDuration"
 posx = 330
 posy = 104
 font = "font7S"
-fill = "white"
+fill = "color_7S"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "vtitle"
 [[V_LAYOUT.V_LIVETV.fields]]
@@ -1042,6 +1044,8 @@ shared_element = "finishtime"
 shared_element = "acodeclogo"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "vcodeclogo"
+[[V_LAYOUT.V_LIVETV.fields]]
+shared_element = "plot"
 
 [[V_LAYOUT.V_LIVETV.fields]]
 name = "timeshift"
