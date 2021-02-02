@@ -187,6 +187,33 @@ def element_vcodeclogo(image, draw, info, field, screen_mode, layout_name):
     return ""
 
 kodi_panel_display.ELEMENT_CB["vcodeclogo"] = element_vcodeclogo
+#--------live TV progress bat---------------------------
+def element_livetv_progbar(image, draw, info, field, screen_mode, layout_name):
+        # Calculate progress in media, using InfoLabels appropriate for LiveTV
+    prog = kodi_panel_display.calc_progress(
+        info["PVR.EpgEventElapsedTime"],
+        info["PVR.EpgEventDuration"],
+        kodi_panel_display.video_dmode.name
+    )
+
+    show_prog = True
+
+       # If the field has a display conditional
+       # defined, let's test that to decide if we should proceed.
+    if ("display_if" in field or
+           "display_ifnot" in field):
+           show_prog = kodi_panel_display.check_display_expr(field,
+                                          info,
+                                          kodi_panel_display.ScreenMode.AUDIO,
+                                          kodi_panel_display.video_dmode.name)
+
+    if show_prog:
+            kodi_panel_display.progress_bar(
+               draw, field, prog,
+               use_long_len = (info['PVR.EpgEventDuration'].count(":") == 2)
+           )
+
+kodi_panel_display.ELEMENT_CB["livetv_prog"] = element_livetv_progbar
 #-----------------------------------------------------------------------------
 
 # Use a Linux framebuffer via luma.core.device

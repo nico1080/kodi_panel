@@ -1012,8 +1012,18 @@ dynamic = 1
 ################################ LIVE TV ##################################
 [V_LAYOUT.V_LIVETV.thumb]   # artwork / movie poster
 shared_element = "thumb"
-[V_LAYOUT.V_LIVETV.prog]    # Progress Bar
-shared_element = "progress_bar"
+#[V_LAYOUT.V_LIVETV.prog]    # Progress Bar
+#shared_element = "progress_bar"
+[[V_LAYOUT.V_LIVETV.fields]]    # Progress Bar
+name = "livetv_prog"
+posx   = 330     # upper-left corner x position
+posy   = 7       # upper-left corner y position
+height = 15       # pixel height
+short_len = 194  # length when elapsed time matches 00:00 (min, seconds)
+long_len  = 300  # length when elapsed time matches 00:00:00 (hrs, mins, seconds)
+color_fg = "color_7S"
+color_bg = "color_gray"
+
 [[V_LAYOUT.V_LIVETV.fields]]
 name = "PVR.EpgEventElapsedTime"
 posx = 330
