@@ -162,6 +162,8 @@ ENABLE_IDLE_STATUS = true
    "PVR.TimeShiftOffset",
 	 "VideoPlayer.TimeRemaining",
    "VideoPlayer.Plot",
+   "Player.Art(season.poster)",
+   "Player.Art(tvshow.poster)",
 	 ]
 
 
@@ -1078,8 +1080,24 @@ suffix = ""
 dynamic = 1
 
 ################################ TV SHOWS ##################################
-[V_LAYOUT.V_TV_SHOW.thumb]   # artwork / movie poster
-shared_element = "thumb"
+#[V_LAYOUT.V_TV_SHOW.thumb]   # artwork / movie poster
+#shared_element = "thumb"
+[[V_LAYOUT.V_TV_SHOW.fields]]   # artwork / movie poster
+name = "generic_artwork"
+posx = 0
+posy = 0
+width  = 320
+height = 250
+#center_sm = 1
+use_path= "Player.Art(tvshow.poster)"
+[[V_LAYOUT.V_TV_SHOW.fields]]   # artwork / movie poster
+name = "generic_artwork"
+posx = 170
+posy = 0
+width  = 320
+height = 250
+#center_sm = 1
+use_path= "Player.Art(season.poster)"
 [V_LAYOUT.V_TV_SHOW.prog]    # Progress Bar
 shared_element = "progress_bar"
 [[V_LAYOUT.V_TV_SHOW.fields]]
