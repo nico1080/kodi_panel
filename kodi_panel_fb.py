@@ -145,7 +145,7 @@ codec_logo = {
     "dts": "images/codeclogo/audio/dts.png",
     "truehd": "images/codeclogo/audio/truehd.png",
     "wmapro": "images/codeclogo/audio/wmapro.png",
-    "mp3float": "images/codeclogo/audio/mp3float.png",
+    "mp3float": "images/codeclogo/audio/mp3.png",
     "flac": "images/codeclogo/audio/flac.png",
     "alac": "images/codeclogo/audio/alac.png",
     "vorbis": "images/codeclogo/audio/vorbis.png",
