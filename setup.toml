@@ -172,7 +172,9 @@ ENABLE_IDLE_STATUS = true
 #
 #   https://kodi.wiki/view/List_of_boolean_conditions
 #
-# STATUS_BOOLEANS = []
+STATUS_BOOLEANS = [
+"System.ScreenSaverActive",
+]
 # AUDIO_BOOLEANS = []
 VIDEO_BOOLEANS = [
 "Pvr.IsTimeShift",
