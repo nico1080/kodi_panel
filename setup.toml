@@ -174,7 +174,9 @@ ENABLE_IDLE_STATUS = true
 #
 # STATUS_BOOLEANS = []
 # AUDIO_BOOLEANS = []
-# VIDEO_BOOLEANS = []
+VIDEO_BOOLEANS = [
+"Pvr.IsTimeShift",
+]
 # SLIDESHOW_BOOLEANS = []
 
 
@@ -1088,7 +1090,7 @@ posy  = 320
 font  = "font_tiny"
 fill  = "white"
 dynamic = 1
-display_ifnot = [ "timeshiftcheck", "true"]
+display_if = [ "Pvr.IsTimeShift", "true"]
 
 [[V_LAYOUT.V_LIVETV.fields]]
 name = "Player.FinishTime"
