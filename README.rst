@@ -22,7 +22,7 @@ of the XBMC Foundation.  Fonts are redestributed under either the
 SIL Open Font License or Apache 2.0; see 
 `fonts/sources.txt <https://github.com/mattblovell/kodi_panel/blob/master/fonts/sources.txt>`_ 
 for further information.  Album and movie cover art (in photos or in emulator
-screenshots) is *not* a part of kodi_display and is shown under the Fair Use doctrine.
+screenshots) is *not* a part of kodi_panel and is shown under the Fair Use doctrine.
 
 .. image:: https://raw.github.com/mattblovell/kodi_panel/master/extras/working_lcd.jpg
 
@@ -145,8 +145,8 @@ Python modules are needed:
 
 
 The ``example_setup_320x240.toml`` file should be copied to ``setup.toml``
-and edited as appropriate for your needs.  Additional example files may
-get populated at other display resolutions.  If kodi_panel is to run on
+and edited as appropriate for your needs.  Additional example files at other
+display resolutions are also available.  If kodi_panel is to run on
 the same SBC as hosting the display, the ``BASE_URL`` within ``setup.toml``
 can be left using ``localhost``.  Otherwise, set it as needed.
 
@@ -295,8 +295,8 @@ as a consequence of the Entware installation.
 7. In the ``kodi_panel/`` directory, copy and rename
    ``example_setup_320x240.toml`` to ``setup.toml``.  Open the file
    for editing, checking that at least ``BASE_URL`` and display width
-   and height are correct.  (Additional example files at other
-   resolutions will hopefully get populated.)
+   and height are correct.  (A few example setup files at other
+   resolutions are also available.)
      
 Assuming the above is all successful, you should now be able to
 run any of the demonstrations from luma.examples.  If Kodi is up
@@ -486,7 +486,7 @@ HDMI IPS panel.  Getting the 3.5-inch ILI9486 display working required extending
 luma.lcd, and its authors welcomed the addition.  I got the HDMI display working
 thanks to a few additions to luma.core's framebuffer support.
 
-So, here's a photo showing the two IPS panels, both from Waveshare.  The 3.5-inch
+Here's a photo showing the two IPS panels, both from Waveshare.  The 3.5-inch
 display is on the left, and the 4-inch display is on the right.
 
 .. image:: https://raw.github.com/mattblovell/kodi_panel/master/extras/dualing_displays.jpg
