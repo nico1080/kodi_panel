@@ -50,6 +50,16 @@ import threading
 import warnings
 
 # -------------------------------custom_function-----------------------------
+
+#status autoselect
+def my_status_select(info):
+    if info['System.ScreenSaverActive']:
+        return kodi_panel_display.IDisplay["screensaver"]
+    else:
+        return kodi_panel_display.IDisplay[config.settings["STATUS_INITIAL"]]
+
+kodi_panel_display.STATUS_SELECT_FUNC = my_status_select
+
 # channel number lookup
 ch_N = {
     "1"      : "1.0",

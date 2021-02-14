@@ -321,8 +321,9 @@ SLAYOUT_INITIAL = "DEFAULT"
 #     [[STATUS_LAYOUT.my_layoutB.fields]]
 #
 # --------------------------------------------------------------------
-# STATUS_NAMES = []
-# STATUS_INITIAL = ""
+STATUS_AUTOSELECT = true
+STATUS_NAMES = [ "default", "screensaver" ]
+STATUS_INITIAL = "default"
 
 # Codec Lookup
 #
@@ -1298,12 +1299,12 @@ center = 1
 #
 ################################ STATUS ##################################
 
-[STATUS_LAYOUT.thumb]   # Kodi logo
+[STATUS_LAYOUT.default.thumb]   # Kodi logo
 posx = 5
 posy = 5
 size = 128
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "version"        # internal callback
 posx = 145
 posy = 8
@@ -1311,7 +1312,7 @@ font = "font_main"
 fill = "color_artist"
 
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "summary"
 posx = 145
 posy = 40
@@ -1322,7 +1323,7 @@ fill = "white"
 # The remaining fields all get populated via a special JSON-RPC query
 # to Kodi specifically for the status screen.
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "System.Time(hh:mm:ss)"
 posx = 250
 posy = 80
@@ -1330,7 +1331,7 @@ font = "font7S"
 fill = "color_7S"
 dynamic = 1
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "System.TotalUptime"
 posx = 5
 posy = 240
@@ -1343,7 +1344,7 @@ max_width = 300
 max_lines = 1
 
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "Weather.Temperature"
 posx = 5
 posy = 310
@@ -1352,7 +1353,7 @@ font = "font_sm"
 fill = "white"
 #dynamic = 1
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "System.Date"
 posx = 5
 posy = 170
@@ -1360,7 +1361,7 @@ format_str = "{System.Date}, {System.Time}"
 font = "font_sm"
 fill = "white"
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "System.Uptime"
 posx = 5
 posy = 210
@@ -1369,7 +1370,7 @@ font = "font_sm"
 fill = "white"
 #dynamic = 1
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "System.CPUTemperature"
 posx = 5
 posy = 280
@@ -1377,14 +1378,14 @@ format_str = "CPU: {System.CPUTemperature}, {System.CpuFrequency}"
 font = "font_sm"
 fill = "white"
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "kodi_version"  # special treatment
 posx = 5
 posy = 340
 font = "font_sm"
 fill = "white"
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "PVR.BackendDiskSpace"
 posx = 5
 posy = 400
@@ -1392,7 +1393,7 @@ font = "font_sm"
 fill = "white"
 prefix= "Nas: "
 
-[[STATUS_LAYOUT.fields]]
+[[STATUS_LAYOUT.default.fields]]
 name = "PVR.BackendRecordings"
 posx = 5
 posy = 370
@@ -1400,6 +1401,14 @@ format_str = "Recordings: {PVR.BackendRecordings} Coming: {PVR.BackendTimers}"
 font = "font_sm"
 fill = "white"
 dynamic = 0
+
+[[STATUS_LAYOUT.screensaver.fields]]
+name = "System.Time(hh:mm:ss)"
+posx = 180
+posy = 180
+font = "font7S"
+fill = "color_7S"
+dynamic = 1
 
 # --------------------------------------------------------------------
 # Slideshow Screen Content
