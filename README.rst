@@ -8,7 +8,9 @@ and `luma.lcd <https://github.com/rm-hull/luma.lcd/>`_, which in turn
 depend upon `Pillow <https://python-pillow.org/>`_ and `RPi.GPIO
 <https://pypi.org/project/RPi.GPIO/>`_.  Information and album cover artwork
 is retrieved from Kodi using
-`JSON-RPC <https://kodi.wiki/view/JSON-RPC_API>`_.
+`JSON-RPC <https://kodi.wiki/view/JSON-RPC_API>`_.  The contents shown on the
+display are configured via a 
+`TOML <https://toml.io/en/>`_ setup file, intended to be easily customized.
 
 The script is generally intended to run on the same SBC (single-board
 computer) on which Kodi itself is running.  That's not really
@@ -26,8 +28,8 @@ screenshots) is *not* a part of kodi_panel and is shown under the Fair Use doctr
 
 .. image:: https://raw.github.com/mattblovell/kodi_panel/master/extras/working_lcd.jpg
 
-For Raspberry Pi boards, RPi.GPIO obviously works as-is.  For Odroid
-boards, one must instead make use of
+For Raspberry Pi boards and SPI-attached displays, RPi.GPIO obviously works as-is.  
+For Odroid boards, one must instead make use of
 `RPi.GPIO-Odroid <https://github.com/awesometic/RPi.GPIO-Odroid>`_.
 
 The general approach taken by this project, running separately from Kodi
@@ -37,30 +39,39 @@ with Kodi Leia, one is no longer restricted to Python 2.  Being a standalone
 script also means that one can have a separate SBC driving a "Now Playing"
 screen anywhere one would like.  
 
-The various kodi_panel scripts are also fairly short.  If you are
-familiar with reading and writing Python, and making use of the Pillow
-image library, it should be straightforward to modify it to your taste
+If you are familiar with reading and writing Python, and making use of the Pillow
+image library, it should be straightforward to modify kodi_panel to your taste
 or needs.  Using Python also lets one experiment with and inspect the
-results of the JSON-RPC calls to Kodi quite easily.  The Kodi documentation
+results of the JSON-RPC calls to Kodi.  The Kodi documentation
 on
-`JSON-RPC <https://kodi.wiki/view/JSON-RPC_API>`_ and
-`InfoLabels <https://kodi.wiki/view/InfoLabels>`_
+`JSON-RPC <https://kodi.wiki/view/JSON-RPC_API>`_, 
+`InfoLabels <https://kodi.wiki/view/InfoLabels>`_, and
+`InfoBooleans <https://kodi.wiki/view/List_of_boolean_conditions>`__ 
 should give you a complete picture of what information is available.
 (One can also change Kodi's state using JSON-RPC, something I don't even
 attempt here.)
 
-On an Odroid C4, kodi_panel appears to take ~0.5% of CPU time when idle
-and about ~2.5% when music playback is occurring.  Kodi itself, for
-comparison, takes 3% CPU when idle and 8% when busy (for ALAC playback).
-The CPU load increases when running remotely from Kodi and as
-the display size increases.  For a 800x480 display using network
+The ``setup.toml`` file provides control over fonts, default images, and
+the layout of elements on the display.  Several hooks for callback functions 
+also exist throughout the main ``kodi_panel_display.py`` file.  One can 
+customize many aspects of the display screens via additions to the 
+(very short) startup scripts, rather than modifying ``kodi_panel_display.py`` itself.
+
+Running on an Odroid C4 with a 320x480 SPI display, kodi_panel appears to 
+take ~0.5% of CPU time when idle and about ~2.5% when music playback is 
+occurring.  Kodi itself, for comparison, takes 3% CPU when idle and 
+8% when busy (for ALAC playback).
+
+This CPU load increases when running remotely from Kodi and as
+the display size increases.  For a 800x480 HDMI display using network
 calls to query Kodi state, the active load increases to 12 to 15%
-running on an RPi 3.
+running on an RPi 3.  Using an RPi Zero to drive that same
+display, the active CPU load goes up to 25%, with an idle load in the 
+11% to 14% range.
 
 
 Installation
 ------------
-
 
 Kodi setup
 **********
@@ -84,7 +95,9 @@ Kodi installation:
   - For AirPlay cover art, Kodi makes use of a file in temporary storage,
     specifically ``special://temp/airtunes_album_thumb.jpg`` or a similar PNG file.
     The ``special://temp`` path must be added as a media source (not just a file browser
-    source) if one wants AirPlay cover art to be functional.
+    source) if one wants AirPlay cover art to be functional running on a separate
+    SBC from Kodi.  (If kodi_panel is running on the same SBC as Kodi, local file
+    system access suffices.)
 
 
 GPIOs
