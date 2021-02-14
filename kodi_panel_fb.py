@@ -143,6 +143,7 @@ codec_logo = {
     "dtshd_ma": "images/codeclogo/audio/dtshd_ma.png",
     "dtshd_hra": "images/codeclogo/audio/dtshd_hra.png",
     "dts": "images/codeclogo/audio/dts.png",
+    "dca": "images/codeclogo/audio/dts.png",
     "truehd": "images/codeclogo/audio/truehd.png",
     "wmapro": "images/codeclogo/audio/wmapro.png",
     "mp3float": "images/codeclogo/audio/mp3.png",
