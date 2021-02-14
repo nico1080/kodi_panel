@@ -167,6 +167,16 @@ ENABLE_IDLE_STATUS = true
 	 ]
 
 
+#
+# With v1.44, InfoBooleans can also be retrieved
+#
+#   https://kodi.wiki/view/List_of_boolean_conditions
+#
+# STATUS_BOOLEANS = []
+# AUDIO_BOOLEANS = []
+# VIDEO_BOOLEANS = []
+# SLIDESHOW_BOOLEANS = []
+
 
 # Paths to default thumbnails for audio and status screen.  These now
 # get resized, to whatever is specified for the audio screen used.
@@ -200,8 +210,8 @@ ALAYOUT_INITIAL = "A_DEFAULT"
 #   following tidbit ...
 #
 #   Should the layout for video screens be auto-selected (within the
-#   video_screens() function) based upon which InfoLabel fields are
-#   populated?  If so, then set VLAYOUT_AUTOSELECT to true.
+#   video_screens() function) based upon content of InfoLabel fields or
+#   InfoBooleans?  If so, then set VLAYOUT_AUTOSELECT to true.
 #
 #   If that flag is set to true, then VLAYOUT_NAMES should be
 #   populated with entries that match the heuristic if-then that is
@@ -470,9 +480,10 @@ SLAYOUT_INITIAL = "DEFAULT"
 #               resulting from "evaluating" the InfoLabel or callback
 #               function.
 #
-#               An example:
+#               Examples:
 #
 #                 display_if = [ "MusicPlayer.TrackNumber", "02" ]
+#                 display_if = [ "Player.Paused", "true" ]
 #
 #
 #   Internal callbacks are used for the 'codec' and 'artist' text
@@ -512,14 +523,24 @@ SLAYOUT_INITIAL = "DEFAULT"
 # Default audio info screen
 #
 
+# Note that one can optionally specify a display_if or display_ifnot
+# expression for the cover art thumbnail (thumb)
 [A_LAYOUT.A_DEFAULT.thumb]   # Artwork
 posx = 3
 posy = 4
 size = 1000
+
 # If artwork is smaller than the above size, should it be centered
 # where the fullsize artwork would have been placed?
 center_sm = 1
 
+# Normally, artwork only gets reduced in size.  Setting this flag
+# enables upsizing to occur.  Note that the result may be blocky or
+# blurry in appearance.
+# enlarge = 1
+
+# Note that one can optionally specify a display_if or display_ifnot
+# expression for the progress bar (prog)
 [A_LAYOUT.A_DEFAULT.prog]    # Progress Bar
 posx   = 960     # upper-left corner x position
 posy   = 5       # upper-left corner y position
