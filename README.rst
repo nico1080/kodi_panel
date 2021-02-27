@@ -28,13 +28,11 @@ screenshots) is *not* a part of kodi_panel and is shown under the Fair Use doctr
 
 .. image:: https://raw.github.com/mattblovell/kodi_panel/master/extras/working_lcd.jpg
 
-For Raspberry Pi boards and SPI-attached displays, RPi.GPIO obviously works as-is.  
-For Odroid boards, one must instead make use of
-`RPi.GPIO-Odroid <https://github.com/awesometic/RPi.GPIO-Odroid>`_.
 
 The general approach taken by this project, running separately from Kodi
-and retrieving all relevant state via JSON-RPC, has been used by other
-projects.  The main advantage of *not* being a Kodi addon is that, at least
+and retrieving all relevant state via JSON-RPC, has been used by 
+`other projects <https://github.com/mattblovell/kodi_panel/blob/master/other/similar.md>`_.
+The main advantage of *not* being a Kodi addon is that, at least
 with Kodi Leia, one is no longer restricted to Python 2.  Being a standalone
 script also means that one can have a separate SBC driving a "Now Playing"
 screen anywhere one would like.  
@@ -51,11 +49,13 @@ should give you a complete picture of what information is available.
 (One can also change Kodi's state using JSON-RPC, something I don't even
 attempt here.)
 
-The ``setup.toml`` file provides control over fonts, default images, and
+The ``setup.toml`` file provides control over fonts, font sizes, colors, default images, and
 the layout of elements on the display.  Several hooks for callback functions 
 also exist throughout the main ``kodi_panel_display.py`` file.  One can 
 customize many aspects of the display screens via additions to the 
-(very short) startup scripts, rather than modifying ``kodi_panel_display.py`` itself.
+very short startup scripts, rather than modifying ``kodi_panel_display.py`` itself.
+(Look for the long comment blocks describing the ``ELEMENT_CB`` and 
+``STRING_CB`` dictionaries and the currently-implemented callbacks for details.)
 
 Running on an Odroid C4 with a 320x480 SPI display, kodi_panel appears to 
 take ~0.5% of CPU time when idle and about ~2.5% when music playback is 
@@ -68,6 +68,12 @@ calls to query Kodi state, the active load increases to 12 to 15%
 running on an RPi 3.  Using an RPi Zero to drive that same
 display, the active CPU load goes up to 25%, with an idle load in the 
 11% to 14% range.
+
+If you're interested in learning the development history of kodi_panel, 
+you can read through these two discussions in CoreELEC's forums:
+
+- `Graphical front panel display <https://discourse.coreelec.org/t/graphical-front-panel-display/12932>`_
+- `RPi-GPIO-Odroid & Python Pillow <https://discourse.coreelec.org/t/rpi-gpio-odroid-python-pillow/13088>`_
 
 
 Installation
@@ -208,16 +214,13 @@ framebuffer version of kodi_panel.  Naturally, you can edit the service file to
 match your needs.
 
 
-Odroid Boards
-*************
+Odroid C4
+*********
 
-The instructions below worked for CoreELEC 9.2.x (Kodi 18, Linux 4.9.113) on an Odroid C4.  
-For Odroid boards, if you're interested in learning the (short) development
-history of kodi_panel, you can read through these two discussions in
-CoreELEC's forums:
-
-- `Graphical front panel display <https://discourse.coreelec.org/t/graphical-front-panel-display/12932>`_
-- `RPi-GPIO-Odroid & Python Pillow <https://discourse.coreelec.org/t/rpi-gpio-odroid-python-pillow/13088>`_
+The instructions below worked for CoreELEC 9.2.x (Kodi 18, Linux 4.9.113) on an Odroid C4. 
+For Raspberry Pi boards and SPI-attached displays, RPi.GPIO obviously works as-is.  
+For Odroid boards, one must instead make use of
+`RPi.GPIO-Odroid <https://github.com/awesometic/RPi.GPIO-Odroid>`_.
 
 Hardkernel maintains information regarding the GPIO headers for their various
 boards on the `Odroid Wiki <https://wiki.odroid.com/>`_.  I consulted

@@ -38,6 +38,7 @@ from datetime import datetime, timedelta
 from aenum import Enum, extend_enum
 from functools import lru_cache
 import copy
+import math
 import time
 import logging
 import requests
@@ -52,7 +53,7 @@ import traceback
 # kodi_panel settings
 import config
 
-PANEL_VER = "v1.44"
+PANEL_VER = "v1.47"
 
 #
 # Audio/Video codec lookup table
@@ -134,7 +135,8 @@ STATUS_LABELS = [
     "System.CPUTemperature",
     "System.CpuFrequency",
     "System.Date",
-    "System.Time",
+    "System.Time",    
+    "System.Time(hh:mm:ss)",
     "System.BuildVersion",
     "System.BuildDate",
 ]
@@ -457,8 +459,8 @@ class LayoutEnum(Enum):
 
 class ADisplay(LayoutEnum): pass   # audio
 class VDisplay(LayoutEnum): pass   # video
-class SDisplay(LayoutEnum): pass   # slideshow
-class IDisplay(LayoutEnum): pass   # info / idle screen
+class SDisplay(LayoutEnum): pass   # slideshow (photos)
+class IDisplay(LayoutEnum): pass   # status/info screen
 
 
 #
@@ -528,9 +530,9 @@ if SLIDESHOW_ENABLED:
 
 
 # The status/info screen(s) is treated differently.  For historical
-# reasons, the setup file may define only a single layout.  So, if no
-# config variables exist declaring other status/info layout names,
-# don't emit any warning.
+# reasons, the setup file is free to define only a single layout.  So,
+# if no config variables exist declaring other status/info layout
+# names, don't emit any warning.
 #
 # Also, the variable naming for the status/info screens isn't quite
 # consistent due to the development history of this feature.
@@ -1014,6 +1016,63 @@ def element_time_hrmin(image, draw, info, field, screen_mode, layout_name):
     return ""
 
 
+# Small analog clock, copied from luma.example's clock.py
+#
+# This element can only be used if "System.Time(xx:mm:ss)" is included
+# in the retrieved InfoLabels.  The more-typical System.Time InfoLabel
+# only provides hours and minutes (along with am/pm).
+#
+# center position is specified by element's posx and posy.
+# radius of clock must also be specifed.
+#
+def posn(angle, arm_length):
+    dx = int(math.cos(math.radians(angle)) * arm_length)
+    dy = int(math.sin(math.radians(angle)) * arm_length)
+    return (dx, dy)
+
+def element_analog_clock(image, draw, info, field, screen_mode, layout_name):
+    if "System.Time(hh:mm:ss)" in info:
+        (now_hour, now_min, now_sec) = info['System.Time(hh:mm:ss)'].split(":")
+
+        margin = 4
+        cx = field["posx"]
+        cy = field["posy"]
+        radius = field["radius"]
+
+        # positions for outer circle
+        left   = cx - radius
+        top    = cy - radius
+        right  = cx + radius
+        bottom = cy + radius
+
+        # angles for all hands
+        hrs_angle = 270 + (30 * (int(now_hour) + (int(now_min) / 60.0)))
+        hrs = posn(hrs_angle, radius - margin - 7)
+
+        min_angle = 270 + (6 * int(now_min))
+        mins = posn(min_angle, radius - margin - 2)
+
+        sec_angle = 270 + (6 * int(now_sec))
+        secs = posn(sec_angle, radius - margin - 2)
+
+        # outer circle
+        draw.ellipse((left, top, right, bottom),
+                     outline=info.get("outline", "white"))
+
+        # hands
+        draw.line((cx, cy, cx + hrs[0], cy + hrs[1]),   fill=info.get("fill", "white"))
+        draw.line((cx, cy, cx + mins[0], cy + mins[1]), fill=info.get("fill", "white"))
+        draw.line((cx, cy, cx + secs[0], cy + secs[1]), fill=info.get("fills", "red"))
+
+        # center circle
+        draw.ellipse((cx - 2, cy - 2, cx + 2, cy + 2),
+                     fill=info.get("fill", "white"),
+                     outline=info.get("outline", "white"))
+
+    return ""
+
+
+
 # Dictionaries of element and string callback functions, with each key
 # corresponding to the "name" specified for a field (within a layout's
 # array named "fields").
@@ -1076,7 +1135,8 @@ ELEMENT_CB = {
     'audio_cover' : element_audio_cover,
 
     # Status screen elements
-    'time_hrmin' : element_time_hrmin,
+    'time_hrmin'   : element_time_hrmin,
+    'analog_clock' : element_analog_clock,
 
     # Any screen
     'thin_line'       : element_thin_line,
@@ -1883,6 +1943,19 @@ def draw_fields(image, draw, layout, info,
 #
 #     kodi_display_panel.STATUS_SELECT_FUNC = my_status_selection
 #
+#
+#   Here is an example, complete with the namespace qualification one
+#   would need when using this code in an external startup script.
+#
+#     def my_status_select(info):
+#         if info['System.ScreenSaverActive']:
+#             return kodi_panel_display.IDisplay["screensaver"]
+#         else:
+#             return kodi_panel_display.IDisplay[config.settings["STATUS_INITIAL"]]
+#
+#     kodi_panel_display.STATUS_SELECT_FUNC = my_status_select
+#
+#
 STATUS_SELECT_FUNC = None
 
 
@@ -2324,7 +2397,7 @@ def video_screen_dynamic(image, draw, layout, info, prog):
 
 # Video selection heuristic
 #
-#   Default Heuristic to determine layout based upon populated
+#   Default heuristic to determine layout based upon populated
 #   InfoLabels, if enabled via settings.  Originally suggested by
 #   @noggin and augmented by @nico1080 in CoreELEC Forum discussion.
 #
@@ -2349,9 +2422,9 @@ def video_screen_dynamic(image, draw, layout, info, prog):
 #   variable.  Reassignment of that variable permits an end-user's
 #   script to completely override the above heurstic.
 #
-#  Sole argument is a dictionary containing the video InfoLabels
-#  retrieved from Kodi.  Function MUST return the VDisplay
-#  enumeration to use for the screen update.
+#   The sole argument is a dictionary containing the video InfoLabels
+#   retrieved from Kodi.  Function MUST return the VDisplay
+#   enumeration to use for the screen update.
 #
 def video_select_default(info):
     if (info["Player.Filenameandpath"].startswith("pvr://recordings") and
