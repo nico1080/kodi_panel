@@ -128,6 +128,7 @@ ENABLE_IDLE_STATUS = true
 
 # List of additional InfoLabels to retrieve for status screen
  STATUS_LABELS = [
+ "System.OSVersionInfo",
  "Weather.Conditions",
  "Weather.Temperature",
  "System.TotalUptime",
@@ -214,8 +215,8 @@ ALAYOUT_INITIAL = "A_DEFAULT"
 #   following tidbit ...
 #
 #   Should the layout for video screens be auto-selected (within the
-#   video_screens() function) based upon content of InfoLabel fields or
-#   InfoBooleans?  If so, then set VLAYOUT_AUTOSELECT to true.
+#   video_screens() function) based upon content of InfoLabel fields
+#   or InfoBooleans?  If so, then set VLAYOUT_AUTOSELECT to true.
 #
 #   If that flag is set to true, then VLAYOUT_NAMES should be
 #   populated with entries that match the heuristic if-then that is
@@ -345,6 +346,53 @@ STATUS_INITIAL = "default"
 #   "color_".  Color references without those initial characters just
 #   get passed through, without a lookup in this dictionary.
 #
+#   Color choices can be explored online at https://www.color-hex.com/
+#
+#   Time display / progress bar
+#   ---------------------------
+#   Used 'SpringGreen' for time color and progress bar for a while.
+#   Other colors tried:
+#
+#    SpringGreen
+#    #00FF7A        green brightened with blue, somewhat LED-ish
+#    #00A3CC        light-ish blue
+#    #00A0E3        blue, close to an LED
+#    #3399ff        skyblue
+#    #38bde8        Kodi logo's blue
+#
+#   Artist
+#   ------
+#    yellow
+#    sandybrown
+#    tan
+#    #d6bb97        one tint brighter than "tan"
+#    #e7d0b5        several tints brigher than "tan"
+#    #db9356        one tint darker than "sandybrown"
+#    #c7a579        one tint darker than "burlywood"
+#
+#    #e5d47d        one tint darker than lightgoldenrod
+#    #ccbc6f        two tints darker than lightgoldenrod
+#
+#    #ffd1a3
+#
+#
+#  Searching around for information regarding the colors of old
+#  monochrome monitors, I also came across an image that claimed
+#  the following hex values were representative:
+#
+#   Amber          #FFB000   (600 nm)
+#   Light Amber    #FFCC00   (593 nm)
+#
+#   Green 1        #33FF00   (524 nm)
+#   Apple ][       #33FF33
+#   Green 2        #00FF33   (506 nm)
+#   Apple IIc      #66FF66
+#   Green 3        #00FF66   (502 nm)
+#
+#
+#  After lots o'indecision, I decided to go with the light amber!
+#
+#
 [COLORS]
  color_gray   = '#424242'    # progress bar background (used 'dimgrey' for a while)
  color_7S     = '#00FFD0'    # 7-Segment color (used 'SpringGreen' for a while)
@@ -367,6 +415,11 @@ STATUS_INITIAL = "default"
   path = "fonts/Roboto-Medium.ttf"
   size = 28
   encoding = 'unic'
+
+# The "font_lg" below is what the layouts below all use for the
+# track title.  I am still trying to find a font that has good
+# readability at a distance while also being narrow (so as to display
+# a decent number of characters).
 
 [[fonts]]
   name = "font_bold"
@@ -481,7 +534,7 @@ STATUS_INITIAL = "default"
 #       ELEMENT_CB table or the STRING_CB table.  That match triggers
 #       execution of the corresponding callback function.
 #
-#     - An arbitrary string (not matching an InfoLabels or Booleans or
+#     - An arbitrary string (not matching an InfoLabel or Boolean or
 #       any callback function names), provided that the entry ALSO
 #       specifies a 'format_str' key.  The interpolated format_str
 #       always gets rendered.
@@ -490,8 +543,8 @@ STATUS_INITIAL = "default"
 #   typically expected to yield a text string to display.  Remaining
 #   keys that control the rendering of that text are as follows:
 #
-#      posx     X-coordinate for display (horizontal position)
-#      posy     Y-coordinate for display (vertical position)
+#      posx     X-coordinate for field (horizontal position)
+#      posy     Y-coordinate for field (vertical position)
 #      font     Font to use for rendering
 #      fill     Text color
 #
@@ -536,9 +589,9 @@ STATUS_INITIAL = "default"
 #      lfont    Font for label string
 #      lfill    Font fill color for label string
 #
-#      exclude  A string or an array strings that, if the text to
-#               be displayed exactly matches, causes the element to
-#               not be drawn.
+#      exclude  A string or an array strings that, if the text to be
+#               displayed exactly matches, causes the element to not
+#               be drawn.
 #
 #      display_if / display_ifnot
 #               An alternative mechanism for controlling element
@@ -699,6 +752,7 @@ font = "font_tiny"
 fill = "white"
 prefix = "/"
 
+
 #
 # Finally, the track title in this layout appears below the cover art...
 #
@@ -710,6 +764,7 @@ posy  = 410
 font  = "font_bold"
 fill  = "white"
 trunc = 1
+
 
 #
 # ... while the album title and artist are moved over to the right of
