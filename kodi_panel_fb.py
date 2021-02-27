@@ -21,16 +21,13 @@
 #
 # ----------------------------------------------------------------------------
 #
-from luma.core import device
-
-import os
-from time import sleep
-
-# kodi_panel modules
-import config
-import kodi_panel_display
-
 import sys
+#try:
+#    import RPi.GPIO as GPIO
+#except ImportError:
+#    pass
+
+from luma.core import device
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -39,6 +36,7 @@ from datetime import datetime, timedelta
 from aenum import Enum, extend_enum
 from functools import lru_cache
 import copy
+import math
 import time
 import logging
 import requests
@@ -48,6 +46,12 @@ import re
 import os
 import threading
 import warnings
+import traceback
+
+# kodi_panel settings
+import config
+import kodi_panel_display
+
 
 # -------------------------------custom_function-----------------------------
 
@@ -59,6 +63,64 @@ def my_status_select(info):
         return kodi_panel_display.IDisplay[config.settings["STATUS_INITIAL"]]
 
 kodi_panel_display.STATUS_SELECT_FUNC = my_status_select
+
+def posn(angle, arm_length):
+    dx = int(math.cos(math.radians(angle)) * arm_length)
+    dy = int(math.sin(math.radians(angle)) * arm_length)
+    return (dx, dy)
+
+def element_analog_clock_custom(image, draw, info, field, screen_mode, layout_name):
+    if "System.Time(hh:mm:ss)" in info:
+        (now_hour, now_min, now_sec) = info['System.Time(hh:mm:ss)'].split(":")
+
+        margin = 8
+        cx = field["posx"]
+        cy = field["posy"]
+        radius = field["radius"]
+        width = field["width"]
+
+        # positions for outer circle
+        left   = cx - radius
+        top    = cy - radius
+        right  = cx + radius
+        bottom = cy + radius
+
+        # angles for all hands
+        hrs_angle = 270 + (30 * (int(now_hour) + (int(now_min) / 60.0)))
+        hrs = posn(hrs_angle, radius - 10*margin)
+
+        min_angle = 270 + (6 * (int(now_min) + (int(now_sec) / 60.0)))
+        mins = posn(min_angle, radius - 2*margin)
+
+        sec_angle = 270 + (6 * int(now_sec))
+        secs = posn(sec_angle, radius - margin - 2)
+
+        # outer circle
+        draw.ellipse((left, top, right, bottom),
+                     outline=info.get("outline", "white"), width=width)
+
+        # hands
+        draw.line((cx, cy, cx + hrs[0], cy + hrs[1]),   fill=field.get("fill", "white"), width=width+2)
+        draw.line((cx, cy, cx + mins[0], cy + mins[1]), fill=field.get("fill", "white"), width=width)
+        draw.line((cx, cy, cx + secs[0], cy + secs[1]), fill=field.get("fills", "red"), width=width)
+
+        # mark
+        for mark in range (0,12):
+            mark_begin = posn(30*mark , radius - 2*margin)
+            mark_stop = posn(30*mark , radius + 0*margin)
+            draw.line((cx +mark_begin[0], cy + mark_begin[1], cx + mark_stop[0], cy + mark_stop[1]), fill=field.get("fillmark", "white"), width=2*width)
+
+
+
+        # center circle
+        draw.ellipse((cx - 2, cy - 2, cx + 2, cy + 2),
+                     fill=info.get("fill", "white"),
+                     outline=info.get("outline", "white"))
+
+    return ""
+
+#kodi_panel_display.element_analog_clock = element_analog_clock_custom
+kodi_panel_display.ELEMENT_CB["analog_clock_custom"] = element_analog_clock_custom
 
 # channel number lookup
 ch_N = {

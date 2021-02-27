@@ -1460,10 +1460,20 @@ dynamic = 0
 [[STATUS_LAYOUT.screensaver.fields]]
 name = "System.Time(hh:mm:ss)"
 posx = 180
-posy = 180
+posy = 50
 font = "font7S"
 fill = "color_7S"
 dynamic = 1
+
+[[STATUS_LAYOUT.screensaver.fields]]
+name = "analog_clock_custom"     # internal callback
+posx = 320
+posy = 240
+radius = 200
+width = 3
+fill = "white"
+fills = "red"
+fillmark = "yellow"
 
 # --------------------------------------------------------------------
 # Slideshow Screen Content
