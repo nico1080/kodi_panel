@@ -7,3 +7,5 @@ At 1080p I have no issue on power usage
 
 For the monitor stand I also use 3d printed stand they are on my thingiverse:
 https://www.thingiverse.com/thing:4800202
+
+.. image:: https://github.com/nico1080/kodi_panel/blob/my-config2/extras/15lcdmonitor.jpg
