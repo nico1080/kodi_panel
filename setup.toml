@@ -654,19 +654,17 @@ STATUS_INITIAL = "default"
 [A_LAYOUT.A_DEFAULT.thumb]
 posx = 3
 posy = 4
-size = 1000
+size = 1070
+enlarge = 1
 
-
-  # If artwork is smaller than the above size, should it be centered
-  # where the fullsize artwork would have been placed?
-center_sm = 1
-
+# If artwork is smaller than the above size, should it be centered
+# where the fullsize artwork would have been placed?
+#center_sm = 1
 # Normally, artwork only gets reduced in size.  Setting this flag
 # enables upsizing to occur.  Note that the result may be blocky or
 # blurry in appearance.
-enlarge = 1
-
 # Note that one can optionally specify a display_if or display_ifnot
+
 # expression for the progress bar (prog)
 [A_LAYOUT.A_DEFAULT.prog]    # Progress Bar
 posx   = 960     # upper-left corner x position
@@ -1060,8 +1058,7 @@ posx = 0
 posy = 0
 width  = 1000
 height = 1000
-#size = 900
-center_sm = 1
+#center_sm = 1
 display_ifnot = [ "VideoPlayer.Cover", "DefaultVideoCover.png"]
 enlarge = 1
 
@@ -1240,7 +1237,6 @@ posx = 0
 posy = 0
 width  = 1000
 height = 500
-size = 500
 #center_sm = 1
 enlarge = 1
 use_path= "Player.Art(tvshow.poster)"
@@ -1250,7 +1246,6 @@ posx = 500
 posy = 0
 width  = 700
 height = 500
-size = 500
 #center_sm = 1
 enlarge = 1
 use_path= "Player.Art(season.poster)"
