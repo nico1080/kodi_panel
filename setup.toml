@@ -667,7 +667,7 @@ enlarge = 1
 
 # expression for the progress bar (prog)
 [A_LAYOUT.A_DEFAULT.prog]    # Progress Bar
-posx   = 1080     # upper-left corner x position
+posx   = 820     # upper-left corner x position
 posy   = 5       # upper-left corner y position
 height = 12      # pixel height
 short_len = 420  # length when elapsed time matches 00:00 (min, seconds)
@@ -677,7 +677,7 @@ color_bg = "color_gray"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Time"
-posx = 1080
+posx = 820
 posy = 29
 font = "font7S"
 fill = "color_7S"
@@ -685,20 +685,20 @@ dynamic = 1
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.TrackNumber"
-posx = 1080
+posx = 820
 posy = 300
 font = "font7S"
 fill = "color_7S"
   # Label only appears if the field is present and non-empty
   label = "Track:"
-  lposx = 1080
+  lposx = 820
   lposy = 230
   lfont = "font_tiny"
   lfill = "white"
 
   [[A_LAYOUT.A_DEFAULT.fields]]
   name = "MusicPlayer.PlaylistLength"
-  posx = 1300
+  posx = 1040
   posy = 300
   font = "font7S"
   fill = "color_7S"
@@ -713,14 +713,14 @@ fill = "color_7S"
 # closer to the next row
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Duration"
-posx = 1080
+posx = 820
 posy = 160
 font = "font_tiny"
 fill = "white"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Duration"   # special treatment in audio_screens()
-posx = 1080
+posx = 820
 posy = 440
 font = "font_tiny"
 fill = "white"
@@ -734,7 +734,7 @@ format_str = "{codec} {MusicPlayer.BitsPerSample}/{MusicPlayer.SampleRate}KHz"
 #   happens for videos.
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "channelnumber"
-posx = 1080
+posx = 820
 posy = 500
 font = "font_tiny"
 fill = "white"
@@ -742,7 +742,7 @@ suffix = "Ch"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Genre"
-posx = 1080
+posx = 820
 posy = 560
 font = "font_tiny"
 fill = "white"
@@ -794,8 +794,8 @@ max_lines = 1
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "acodeclogo"
-posx =1600
-posy =650
+posx =820
+posy =700
 
 
 # --------------------------------------------------------------------
@@ -1071,9 +1071,9 @@ posy = 10
 font  = "font_bold"
 #fill  = "white"
 fill  = "color_artist"
-trunc  = 1
+#trunc  = 1
 wrap = 1
-max_width = 700
+max_width = 950
 max_lines = 8
 display_if = [ "VideoPlayer.Cover", "DefaultVideoCover.png"]
 
