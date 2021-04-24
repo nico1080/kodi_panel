@@ -95,20 +95,27 @@ def element_analog_clock_custom(image, draw, info, field, screen_mode, layout_na
         sec_angle = 270 + (6 * int(now_sec))
         secs = posn(sec_angle, radius - margin - 2)
 
-        # outer circle
-        draw.ellipse((left, top, right, bottom),
-                     outline=info.get("outline", "white"), width=width)
-
         # hands
         draw.line((cx, cy, cx + hrs[0], cy + hrs[1]),   fill=field.get("fill", "white"), width=width+2)
         draw.line((cx, cy, cx + mins[0], cy + mins[1]), fill=field.get("fill", "white"), width=width)
         draw.line((cx, cy, cx + secs[0], cy + secs[1]), fill=field.get("fills", "red"), width=width)
 
+        # mark minutes
+        for mark in range (0,60):
+            mark_begin = posn(6*mark , radius - 2*margin)
+            mark_stop = posn(6*mark , radius + 0*margin)
+            draw.line((cx +mark_begin[0], cy + mark_begin[1], cx + mark_stop[0], cy + mark_stop[1]), fill=field.get("fillmarkm", "white"), width=1*width)
+
         # mark
         for mark in range (0,12):
-            mark_begin = posn(30*mark , radius - 2*margin)
+            mark_begin = posn(30*mark , radius - 4*margin)
             mark_stop = posn(30*mark , radius + 0*margin)
             draw.line((cx +mark_begin[0], cy + mark_begin[1], cx + mark_stop[0], cy + mark_stop[1]), fill=field.get("fillmark", "white"), width=2*width)
+
+        # outer circle
+        draw.ellipse((left, top, right, bottom),
+                     outline=info.get("outline", "white"), width=width)
+
 
 
 

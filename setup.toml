@@ -652,9 +652,9 @@ STATUS_INITIAL = "default"
 # Note that one can optionally specify a display_if or display_ifnot
 # expression for the cover art thumbnail (thumb)
 [A_LAYOUT.A_DEFAULT.thumb]
-posx = 3
-posy = 4
-size = 1070
+posx = 0
+posy = 0
+size = 800
 enlarge = 1
 
 # If artwork is smaller than the above size, should it be centered
@@ -667,17 +667,17 @@ enlarge = 1
 
 # expression for the progress bar (prog)
 [A_LAYOUT.A_DEFAULT.prog]    # Progress Bar
-posx   = 960     # upper-left corner x position
+posx   = 1080     # upper-left corner x position
 posy   = 5       # upper-left corner y position
 height = 12      # pixel height
-short_len = 388  # length when elapsed time matches 00:00 (min, seconds)
-long_len  = 600  # length when elapsed time matches 00:00:00 (hrs, mins, seconds)
+short_len = 420  # length when elapsed time matches 00:00 (min, seconds)
+long_len  = 650  # length when elapsed time matches 00:00:00 (hrs, mins, seconds)
 color_fg = "color_7S"
 color_bg = "color_gray"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Time"
-posx = 960
+posx = 1080
 posy = 29
 font = "font7S"
 fill = "color_7S"
@@ -685,16 +685,24 @@ dynamic = 1
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.TrackNumber"
-posx = 960
+posx = 1080
 posy = 300
 font = "font7S"
 fill = "color_7S"
   # Label only appears if the field is present and non-empty
-  label = "Track"
-  lposx = 960
+  label = "Track:"
+  lposx = 1080
   lposy = 230
   lfont = "font_tiny"
   lfill = "white"
+
+  [[A_LAYOUT.A_DEFAULT.fields]]
+  name = "MusicPlayer.PlaylistLength"
+  posx = 1300
+  posy = 300
+  font = "font7S"
+  fill = "color_7S"
+  prefix = "/"
 
 #
 # This group of fields all appear to the right of the cover art
@@ -705,15 +713,15 @@ fill = "color_7S"
 # closer to the next row
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Duration"
-posx = 1400
-posy = 230
+posx = 1080
+posy = 160
 font = "font_tiny"
 fill = "white"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Duration"   # special treatment in audio_screens()
-posx = 1400
-posy = 270
+posx = 1080
+posy = 440
 font = "font_tiny"
 fill = "white"
 format_str = "{codec} {MusicPlayer.BitsPerSample}/{MusicPlayer.SampleRate}KHz"
@@ -726,16 +734,16 @@ format_str = "{codec} {MusicPlayer.BitsPerSample}/{MusicPlayer.SampleRate}KHz"
 #   happens for videos.
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "channelnumber"
-posx = 1400
-posy = 400
+posx = 1080
+posy = 500
 font = "font_tiny"
 fill = "white"
 suffix = "Ch"
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "MusicPlayer.Genre"
-posx = 1400
-posy = 350
+posx = 1080
+posy = 560
 font = "font_tiny"
 fill = "white"
 trunc = 1
@@ -743,13 +751,7 @@ trunc = 1
 # NOTE: For UPnP/DLNA playback, Kodi Leia doesn't seem to capture
 #   dc:date.  Fortunately, the InfoLabel is left blank, unlike what
 #   happens for videos.
-[[A_LAYOUT.A_DEFAULT.fields]]
-name = "MusicPlayer.PlaylistLength"
-posx = 960
-posy = 450
-font = "font_tiny"
-fill = "white"
-prefix = "/"
+
 
 
 #
@@ -759,7 +761,7 @@ prefix = "/"
 [[A_LAYOUT.A_DEFAULT.fields]]
 name  = "MusicPlayer.Title"
 posx  = 4
-posy  = 800
+posy  = 990
 font  = "font_bold"
 fill  = "white"
 trunc = 1
@@ -773,8 +775,8 @@ trunc = 1
 [[A_LAYOUT.A_DEFAULT.fields]]
 name  = "artist"   # special treatment in audio_screens()
 posx  = 4
-posy  = 1200
-font  = "font_sm"
+posy  = 800
+font  = "font_bold"
 fill  = "color_artist"
 trunc = 1
 drop_unknown = 1
@@ -782,9 +784,9 @@ drop_unknown = 1
 [[A_LAYOUT.A_DEFAULT.fields]]
 name  = "MusicPlayer.Album"
 posx  = 4
-posy  = 700
+posy  = 890
 format_str = "({MusicPlayer.Year}) {MusicPlayer.Album}"
-font  = "font_sm"
+font  = "font_bold"
 fill  = "white"
 wrap  = 1
 max_width = 1600
@@ -792,8 +794,8 @@ max_lines = 1
 
 [[A_LAYOUT.A_DEFAULT.fields]]
 name = "acodeclogo"
-posx =1300
-posy =850
+posx =1600
+posy =650
 
 
 # --------------------------------------------------------------------
@@ -972,7 +974,7 @@ fill = "color_7S"
 [shared_element.vtitle]
 name  = "VideoPlayer.Title"
 posx  = 4
-posy  = 900
+posy  = 950
 font  = "font_bold"
 fill  = "white"
 wrap  = 1
@@ -982,7 +984,7 @@ max_lines = 1
 [shared_element.chapter]
 name  = "Player.chapter"
 format_str = "chapter {Player.chapter}/{Player.chaptercount} {Player.chaptername} "
-posx  = 1050
+posx  = 1000
 posy  = 400
 font  = "font_tiny"
 fill  = "white"
@@ -1048,8 +1050,8 @@ dynamic = 1
 posx   = 1000     # upper-left corner x position
 posy   = 15       # upper-left corner y position
 height = 35       # pixel height
-short_len = 400  # length when elapsed time matches 00:00 (min, seconds)
-long_len  = 600  # length when elapsed time matches 00:00:00 (hrs, mins, seconds)
+short_len = 420  # length when elapsed time matches 00:00 (min, seconds)
+long_len  = 650  # length when elapsed time matches 00:00:00 (hrs, mins, seconds)
 color_fg = "color_7S"
 color_bg = "color_gray"
 #
@@ -1057,8 +1059,8 @@ color_bg = "color_gray"
 posx = 0
 posy = 0
 width  = 1000
-height = 1000
-#center_sm = 1
+height = 930
+center_sm = 1
 display_ifnot = [ "VideoPlayer.Cover", "DefaultVideoCover.png"]
 enlarge = 1
 
@@ -1067,7 +1069,8 @@ name= "VideoPlayer.Plot"
 posx = 10
 posy = 10
 font  = "font_bold"
-fill  = "white"
+#fill  = "white"
+fill  = "color_artist"
 trunc  = 1
 wrap = 1
 max_width = 700
@@ -1077,13 +1080,23 @@ display_if = [ "VideoPlayer.Cover", "DefaultVideoCover.png"]
 
 [shared_element.acodeclogo]
 name = "acodeclogo"
-posx =1000
+posx =1150
 posy =750
 
 [shared_element.vcodeclogo]
 name = "vcodeclogo"
 posx =1000
 posy =750
+
+[shared_element.systime]
+name = "System.Time(hh:mm)"
+posx = 1500
+posy = 750
+format_str = "{System.Time}"
+font = "font_tiny"
+fill = "white"
+dynamic = 1
+
 
 # Default video info
 #
@@ -1112,15 +1125,11 @@ shared_element = "finishtime"
 shared_element = "acodeclogo"
 [[V_LAYOUT.V_DEFAULT.fields]]
 shared_element = "vcodeclogo"
-
-
 [[V_LAYOUT.V_DEFAULT.fields]]
-name = "System.Time(hh:mm:ss)"
-posx = 1500
-posy = 750
-font = "font_tiny"
-fill = "white"
-dynamic = 1
+shared_element = "systime"
+
+
+
 
 
 ################################ PVR ##################################
@@ -1152,13 +1161,7 @@ shared_element = "vcodeclogo"
 shared_element = "plot"
 
 [[V_LAYOUT.V_PVR.fields]]
-name = "Player.FinishTime"
-posx = 1000
-posy = 700
-font = "font_tiny"
-fill = "white"
-format_str = "PVR      Current: {System.Time}"
-dynamic = 1
+shared_element = "systime"
 
 ################################ LIVE TV ##################################
 [V_LAYOUT.V_LIVETV.thumb]   # artwork / movie poster
@@ -1207,6 +1210,8 @@ shared_element = "acodeclogo"
 shared_element = "vcodeclogo"
 [[V_LAYOUT.V_LIVETV.fields]]
 shared_element = "plot"
+[[V_LAYOUT.V_LIVETV.fields]]
+shared_element = "systime"
 
 [[V_LAYOUT.V_LIVETV.fields]]
 name = "timeshift"
@@ -1218,15 +1223,15 @@ fill  = "white"
 dynamic = 1
 display_if = [ "Pvr.IsTimeShift", "true"]
 
-[[V_LAYOUT.V_LIVETV.fields]]
-name = "Player.FinishTime"
-posx = 1100
-posy = 850
-font = "font_tiny"
-fill = "white"
-prefix = "Live TV "
-suffix = ""
-dynamic = 1
+#[[V_LAYOUT.V_LIVETV.fields]]
+#name = "Player.FinishTime"
+#posx = 1100
+#posy = 850
+#font = "font_tiny"
+#fill = "white"
+#prefix = "Live TV "
+#suffix = ""
+#dynamic = 1
 
 ################################ TV SHOWS ##################################
 #[V_LAYOUT.V_TV_SHOW.thumb]   # artwork / movie poster
@@ -1235,18 +1240,18 @@ dynamic = 1
 name = "generic_artwork"
 posx = 0
 posy = 0
-width  = 1000
-height = 500
-#center_sm = 1
+width  = 490
+height = 840
+center_sm = 1
 enlarge = 1
 use_path= "Player.Art(tvshow.poster)"
 [[V_LAYOUT.V_TV_SHOW.fields]]   # artwork / movie poster
 name = "generic_artwork"
 posx = 500
 posy = 0
-width  = 700
-height = 500
-#center_sm = 1
+width  = 490
+height = 840
+center_sm = 1
 enlarge = 1
 use_path= "Player.Art(season.poster)"
 [V_LAYOUT.V_TV_SHOW.prog]    # Progress Bar
@@ -1271,22 +1276,25 @@ shared_element = "finishtime"
 shared_element = "acodeclogo"
 [[V_LAYOUT.V_TV_SHOW.fields]]
 shared_element = "vcodeclogo"
-
 [[V_LAYOUT.V_TV_SHOW.fields]]
-name = "Player.FinishTime"
-posx = 1100
-posy = 750
-font = "font_tiny"
-fill = "white"
-prefix = "série "
-suffix = ""
-dynamic = 1
+shared_element = "systime"
+
+#[[V_LAYOUT.V_TV_SHOW.fields]]
+#name = "Player.FinishTime"
+#posx = 1100
+#posy = 750
+#font = "font_tiny"
+#fill = "white"
+#prefix = "série "
+#suffix = ""
+#dynamic = 1
 
 [[V_LAYOUT.V_TV_SHOW.fields]]
 name  = "episode"
 posx  = 4
-posy  = 800
-font  = "font_sm"
+posy  = 850
+font  = "font_bold"
+#font  = "font_sm"
 fill  = "color_artist"
 format_str = "{VideoPlayer.TVShowTitle} S{VideoPlayer.Season}E{VideoPlayer.Episode}"
 
@@ -1315,18 +1323,20 @@ shared_element = "finishtime"
 shared_element = "acodeclogo"
 [[V_LAYOUT.V_MOVIE.fields]]
 shared_element = "vcodeclogo"
-
-
-
 [[V_LAYOUT.V_MOVIE.fields]]
-name = "Player.FinishTime"
-posx = 1100
-posy = 750
-font = "font_tiny"
-fill = "white"
-prefix = "movie "
-suffix = ""
-dynamic = 1
+shared_element = "systime"
+
+
+
+#[[V_LAYOUT.V_MOVIE.fields]]
+#name = "Player.FinishTime"
+#posx = 1100
+#posy = 750
+#font = "font_tiny"
+#fill = "white"
+#prefix = "movie "
+#suffix = ""
+#dynamic = 1
 
 
 
@@ -1397,7 +1407,7 @@ font = "font_sm"
 fill = "white"
 #dynamic = 1
 wrap  = 1
-max_width = 900
+max_width = 1920
 max_lines = 1
 
 
@@ -1462,20 +1472,38 @@ dynamic = 0
 [[STATUS_LAYOUT.screensaver.fields]]
 name = "System.Time(hh:mm:ss)"
 posx = 20
-posy = 50
+posy = 900
+#font = "font_main"
 font = "font7S"
+#fill = "white"
 fill = "color_7S"
 dynamic = 1
 
 [[STATUS_LAYOUT.screensaver.fields]]
 name = "analog_clock_custom"     # internal callback
-posx = 960
+posx = 1300
 posy = 540
-radius = 450
+radius = 500
 width = 6
 fill = "white"
 fills = "red"
 fillmark = "yellow"
+fillmarkm = "lightgrey"
+
+[[STATUS_LAYOUT.screensaver.fields]]
+name = "Weather.Temperature"
+posx = 20
+posy = 500
+format_str = "{Weather.Conditions}, {Weather.Temperature}"
+font = "font_main"
+fill = "white"
+#dynamic = 1
+
+[STATUS_LAYOUT.screensaver.thumb]   # Kodi logo
+posx = 5
+posy = 5
+enlarge=1
+size = 300
 
 # --------------------------------------------------------------------
 # Slideshow Screen Content
